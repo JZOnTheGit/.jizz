@@ -1,0 +1,22 @@
+// Missing semicolon
+let x = 11;
+
+// String with semicolon
+let name = "John";
+
+// Variable declaration
+let y = 5;
+
+// Complete if statement
+if (x > 5) {
+    buss("Greater than 5");
+}
+
+// Variable must be defined first
+let undefinedVar = "some value";
+buss(undefinedVar)
+
+// If statement with parentheses
+if (x > 10) {
+    buss("Too big")
+} 

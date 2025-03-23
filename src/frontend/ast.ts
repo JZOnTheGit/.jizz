@@ -1,4 +1,4 @@
-import Environment from "../runtime/environment.ts";
+import Environment from "../runtime/environment";
 
 export type NodeType = 
 //expressions
@@ -11,10 +11,13 @@ export type NodeType =
 
 //statements
 | "NumericLiteral" 
+| "StringLiteral"
 | "Identifier" 
 | "BinaryExpr" 
 | "UnaryExpr" 
 | "FunctionDeclaration"
+| "IfStatement"
+| "ReturnStatement"
 
 | "Property"
 | "ObjectLiteral";
@@ -87,6 +90,11 @@ export interface NumericLiteral extends Expr {
     value: number;
 }
 
+export interface StringLiteral extends Expr {
+    kind: "StringLiteral";
+    value: string;
+}
+
 export interface Property extends Expr {
     kind: "Property";
     key: string,
@@ -96,6 +104,19 @@ export interface Property extends Expr {
 export interface ObjectLiteral extends Expr {
     kind: "ObjectLiteral";
     properties: Property[]
+}
+
+export interface IfStatement extends Stmt {
+    kind: "IfStatement";
+    condition: Expr;
+    thenBranch: Stmt[];
+    elifBranches: Array<{condition: Expr, body: Stmt[]}>;
+    elseBranch?: Stmt[];
+}
+
+export interface ReturnStatement {
+    kind: "ReturnStatement";
+    value?: Expr;
 }
 
 

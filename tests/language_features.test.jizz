@@ -1,0 +1,66 @@
+// Test variable declarations
+let x = 10;
+const PI = 3.14159;
+
+// Test string operations
+let name = "John";
+let greeting = "Hello, " + name + "!";
+buss(greeting);  // Should print: Hello, John!
+
+// Test string methods
+buss(String_length(greeting));  // Should print the length
+buss(String_toUpperCase(greeting));  // Should print uppercase version
+buss(String_substring(greeting, 0, 5));  // Should print: Hello
+
+// Test arithmetic operations
+let y = 5;
+let sum = x + y;
+let product = x * y;
+let quotient = x / y;
+buss("Arithmetic:", sum, product, quotient);
+
+// Test comparison operators
+if (x > y) {
+    buss("x is greater than y");
+}
+
+// Test objects
+let person = {
+    name: "John",
+    age: 30,
+    city: "New York"
+};
+buss(person);
+
+// Test functions
+fn add(a, b) {
+    let result = a + b;
+    buss("Sum is:", result);
+    return result;
+}
+
+add(5, 3);  // Should print: Sum is: 8
+
+// Test nested if statements
+let age = 25;
+if (age >= 21) {
+    if (age < 30) {
+        buss("Young adult");
+    } else {
+        buss("Adult");
+    }
+} else {
+    buss("Minor");
+}
+
+// Test string manipulation
+let sentence = "  Hello World  ";
+buss(String_trim(sentence));
+let words = String_split(sentence, " ");
+buss(words);
+
+// Test error handling
+// Uncomment to test error cases:
+// let undefinedVar;  // Should throw error
+// const PI = 3.14;  // Should throw error (redeclaration)
+// let invalid = 1 + ;  // Should throw syntax error 

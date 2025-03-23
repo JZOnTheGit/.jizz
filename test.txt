@@ -1,10 +1,7 @@
-fn makeAdder(offset){
-    fn add(x, y){
-    x + y + offset
-    } 
-    add
-}
+let x = 10;
+let y = 20;
 
-const adder = makeAdder (1);
+//result
+let result = x / y;
 
-buss(adder(10, 5))
+buss(result)

@@ -1,0 +1,50 @@
+{
+  "name": "jizz-lang",
+  "version": "1.0.0",
+  "description": "JIZZ Programming Language - A modern, expressive programming language with clean syntax",
+  "main": "dist/cli.js",
+  "type": "commonjs",
+  "bin": {
+    "jizz": "dist/cli.js"
+  },
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "npm run clean && tsc",
+    "test": "npm run build && node dist/tests/run_tests.js",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "keywords": [
+    "programming-language",
+    "interpreter",
+    "typescript",
+    "language",
+    "compiler",
+    "repl"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/jizz-lang.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/jizz-lang/issues"
+  },
+  "homepage": "https://github.com/yourusername/jizz-lang#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^9.4.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.9",
+    "typescript": "^4.8.4"
+  }
+} 
