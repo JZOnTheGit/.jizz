@@ -1,6 +1,6 @@
 {
   "name": "jizz-lang",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "JIZZ Programming Language - A modern, expressive programming language with clean syntax frfr",
   "main": "dist/cli.js",
   "type": "commonjs",
@@ -21,7 +21,7 @@
     "compiler",
     "repl"
   ],
-  "author": "Jainesh Singh",
+  "author": "Jainesh Singh (https://j-singh.net)",
   "license": "MIT",
   "repository": {
     "type": "git",

@@ -73,6 +73,7 @@ program
   .action(() => {
     console.log(chalk.cyan(logo));
     console.log(chalk.yellow("JIZZ Programming Language REPL v1.0.0"));
+    console.log(chalk.gray("Developed by Jainesh Singh | j-singh.net"));
     console.log(chalk.gray("Type 'exit' to quit\n"));
 
     const parser = new Parser();
