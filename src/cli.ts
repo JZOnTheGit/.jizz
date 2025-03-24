@@ -3,12 +3,18 @@
 import { Command } from 'commander';
 import chalk from 'chalk';
 import { readFileSync, existsSync } from 'fs';
-import { resolve } from 'path';
+import { resolve, join } from 'path';
 import Parser from './frontend/parser';
 import { createGlobalEnv } from './runtime/environment';
 import { evaluate } from './runtime/interpreter';
+import { execSync } from 'child_process';
+import https from 'https';
 
 const program = new Command();
+
+// Read package.json for version info
+const packageJsonPath = join(__dirname, '..', 'package.json');
+const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8'));
 
 // ASCII art logo
 const logo = `
@@ -20,16 +26,47 @@ const logo = `
  ╚════╝ ╚═╝╚══════╝╚══════╝
 `;
 
+// Check for updates
+function checkForUpdates(): Promise<void> {
+    return new Promise<void>((resolve) => {
+        https.get('https://registry.npmjs.org/jizz-lang', (res) => {
+            let data = '';
+            res.on('data', (chunk) => data += chunk);
+            res.on('end', () => {
+                try {
+                    const registryData = JSON.parse(data);
+                    const latestVersion = registryData['dist-tags'].latest;
+                    const currentVersion = packageJson.version;
+                    
+                    if (latestVersion !== currentVersion) {
+                        console.log(chalk.yellow('\n📦 Update available!'));
+                        console.log(chalk.gray(`Current version: ${currentVersion}`));
+                        console.log(chalk.green(`Latest version: ${latestVersion}`));
+                        console.log(chalk.cyan('\nTo update, run:'));
+                        console.log(chalk.white('npm update -g jizz-lang\n'));
+                    }
+                } catch (error) {
+                    // Silently fail version check - don't interrupt user's command
+                }
+                resolve();
+            });
+        }).on('error', () => resolve()); // Silently fail on network errors
+    });
+}
+
 program
   .name('jizz')
   .description(chalk.cyan('JIZZ Programming Language frfr CLI'))
-  .version('1.0.0');
+  .version(packageJson.version);
 
 program
   .command('run <file>')
   .description('Run a .jizz file')
-  .action((file) => {
+  .action(async (file) => {
     try {
+      // Check for updates before running
+      await checkForUpdates();
+
       // Resolve absolute path
       const filePath = resolve(file);
 
@@ -70,9 +107,12 @@ program
 program
   .command('repl')
   .description('Start JIZZ REPL (Interactive Shell)')
-  .action(() => {
+  .action(async () => {
+    // Check for updates before starting REPL
+    await checkForUpdates();
+
     console.log(chalk.cyan(logo));
-    console.log(chalk.yellow("JIZZ Programming Language REPL v1.0.0"));
+    console.log(chalk.yellow("JIZZ Programming Language REPL v" + packageJson.version));
     console.log(chalk.gray("Developed by Jainesh Singh | j-singh.net"));
     console.log(chalk.gray("Type 'exit' to quit\n"));
 
@@ -115,7 +155,10 @@ program
 program
   .command('examples')
   .description('Show example JIZZ code')
-  .action(() => {
+  .action(async () => {
+    // Check for updates before showing examples
+    await checkForUpdates();
+
     console.log(chalk.cyan('\nJIZZ Code Examples:\n'));
     console.log(chalk.white(`// Variables
 let x = 10;
