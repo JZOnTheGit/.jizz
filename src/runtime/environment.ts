@@ -3,8 +3,8 @@ import { StringPrototype } from "./stdlib/string";
 
 export function createGlobalEnv(){
     const env = new Environment();
-    env.declareVar("true", MK_BOOL(true), true);
-    env.declareVar("false", MK_BOOL(false), true);
+    env.declareVar("frfr", MK_BOOL(true), true);
+    env.declareVar("cap", MK_BOOL(false), true);
     env.declareVar("null", MK_NULL(), true);
 
     //define a native builtin method

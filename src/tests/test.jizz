@@ -1,18 +1,9 @@
 // This is a test .jizz file
-let x = 10;
-let y = 20;
+let lebronIsKing = frfr;
 
-// Calculate result
-let result = x + y;
-
-// Print the result
-buss("The result is: ")
-buss(result)
-
-// Test some string operations
-let name = "John";
-if (name == "John") {
-    buss("Hello John!")
+if (lebronIsKing) {
+    buss("Lebron is the all knowing king of the universe")
 } else {
-    buss("Hello stranger!")
-} 
+    buss("you speaking cap")
+}
+

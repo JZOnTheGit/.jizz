@@ -29,6 +29,9 @@ jizz repl
 
 # View examples
 jizz examples
+
+# Update to latest version
+npm update -g jizz-lang
 ```
 
 ## Features
@@ -43,6 +46,7 @@ jizz examples
 - Variables and constants
 - Object literals with property access
 - Rich standard library
+- Custom boolean keywords (frfr for true, cap for false)
 
 ## Language Features
 
@@ -51,6 +55,14 @@ jizz examples
 ```javascript
 let x = 10;
 const PI = 3.14159;
+
+// Booleans use frfr and cap
+let isValid = frfr;  // true
+let isFake = cap;    // false
+
+if (isValid == frfr) {
+    buss("This is frfr!");
+}
 ```
 
 ### String Operations
@@ -72,9 +84,10 @@ buss(String_substring(greeting, 0, 5)); // Output: Hello
 let person = {
     name: "John",
     age: 30,
+    isStudent: cap,
     city: "New York"
 };
-buss(person);  // Output: { name: "John", age: 30, city: "New York" }
+buss(person);  // Output: { name: "John", age: 30, isStudent: false, city: "New York" }
 ```
 
 ### Functions
@@ -92,6 +105,8 @@ add(5, 3);  // Output: Sum is: 8
 ### Control Flow
 
 ```javascript
+let age = 25;
+
 if (age >= 21) {
     if (age < 30) {
         buss("Young adult");
@@ -100,6 +115,12 @@ if (age >= 21) {
     }
 } else {
     buss("Minor");
+}
+
+// Using boolean keywords
+let canDrive = age >= 16 ? frfr : cap;
+if (canDrive == frfr) {
+    buss("Can drive!");
 }
 ```
 
