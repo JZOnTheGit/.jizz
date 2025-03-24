@@ -163,19 +163,45 @@ program
     console.log(chalk.white(`// Variables
 let x = 10;
 let name = "John";
+let isActive = frfr;  // Boolean true
+let isEmpty = cap;   // Boolean false
+
+// User Input
+let userName = ask("Enter your name: ");
+buss("Hello, " + userName + "!");
+
+// Type Conversion
+let userAge = int(ask("How old are you? "));
+let ageAsString = str(userAge);
 
 // If statements
-if (x > 5) {
-    buss("Greater than 5");
+if (userAge >= 18) {
+    buss("You are an adult!");
+} else {
+    buss("You are a minor!");
+}
+
+// Skibidi loops (while loops)
+let count = 1;
+skibidi (count <= 5) {
+    buss("Count: " + count);
+    count = count + 1;
+}
+
+// Too loops (for loops)
+too (let i = 0; i < 5; i = i + 1) {
+    buss("Iteration: " + i);
 }
 
 // Functions
 fn greet(name) {
     buss("Hello, " + name + "!");
+    return "Greeting sent to " + name;
 }
 
 // Function calls
-greet("World");
+let result = greet("World");
+buss(result);
 `));
   });
 

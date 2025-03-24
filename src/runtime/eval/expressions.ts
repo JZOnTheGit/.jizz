@@ -1,6 +1,6 @@
 import { RuntimeValue, MK_NULL, NumberValue, ObjectValue, NativeFnValue, FunctionValue, StringValue, MK_STRING, MK_BOOL} from "../values";
 import Environment from "../environment";
-import { AssignmentExpr, BinaryExpr, CallExpr, Identifier, ObjectLiteral} from "../../frontend/ast";
+import { AssignmentExpr, BinaryExpr, CallExpr, Identifier, MemberExpr, ObjectLiteral} from "../../frontend/ast";
 import { evaluate } from "../interpreter";
 
 function eval_numeric_binary_expr (leftHandSide: NumberValue, rightHandSide: NumberValue, operator: string): RuntimeValue {
@@ -139,4 +139,41 @@ export function eval_call_expr(expr: CallExpr, env: Environment): RuntimeValue {
 	}
 
 	throw "Cannot call value that is not a function: " + JSON.stringify(fn);
+}
+
+export function eval_member_expr(expr: MemberExpr, env: Environment): RuntimeValue {
+    const obj = evaluate(expr.object, env);
+    
+    if (obj.type !== 'object') {
+        throw `Cannot access properties of non-object value: ${obj.type}`;
+    }
+    
+    const objectValue = obj as ObjectValue;
+    
+    if (expr.computed) {
+        // Handle computed property access obj["prop"]
+        const prop = evaluate(expr.property, env);
+        if (prop.type !== 'string') {
+            throw `Object property name must be a string`;
+        }
+        
+        const propName = (prop as StringValue).value;
+        if (!objectValue.properties.has(propName)) {
+            throw `Property '${propName}' does not exist on object`;
+        }
+        
+        return objectValue.properties.get(propName) as RuntimeValue;
+    } else {
+        // Handle dot notation obj.prop
+        if (expr.property.kind !== 'Identifier') {
+            throw `Property must be an identifier in dot notation`;
+        }
+        
+        const propName = (expr.property as Identifier).symbol;
+        if (!objectValue.properties.has(propName)) {
+            throw `Property '${propName}' does not exist on object`;
+        }
+        
+        return objectValue.properties.get(propName) as RuntimeValue;
+    }
 }

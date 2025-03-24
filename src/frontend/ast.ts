@@ -17,6 +17,8 @@ export type NodeType =
 | "UnaryExpr" 
 | "FunctionDeclaration"
 | "IfStatement"
+| "WhileStatement"
+| "ForStatement"
 | "ReturnStatement"
 
 | "Property"
@@ -28,6 +30,7 @@ export type NodeType =
 
 export interface Stmt {
     kind: NodeType;
+    [key: string]: any; // Allow additional properties
 }
 
 export interface Program extends Stmt {
@@ -114,7 +117,21 @@ export interface IfStatement extends Stmt {
     elseBranch?: Stmt[];
 }
 
-export interface ReturnStatement {
+export interface WhileStatement extends Stmt {
+    kind: "WhileStatement";
+    condition: Expr;
+    body: Stmt[];
+}
+
+export interface ForStatement extends Stmt {
+    kind: "ForStatement";
+    initializer?: Stmt;  // Can be either VarDeclaration or expression
+    condition?: Expr;    // Can be optional
+    increment?: Expr;    // Can be optional
+    body: Stmt[];
+}
+
+export interface ReturnStatement extends Stmt {
     kind: "ReturnStatement";
     value?: Expr;
 }

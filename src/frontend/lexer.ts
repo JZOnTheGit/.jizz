@@ -24,6 +24,8 @@ export enum TokenType {
     Const, //const
     If, //if
     Else, //else
+    Skibidi, //skibidi (was while)
+    Too, //too (was for)
     Return,
     
     // Separators
@@ -44,6 +46,8 @@ const KEYWORDS: Record<string, TokenType> = {
     fn: TokenType.Fn,
     if: TokenType.If,
     else: TokenType.Else,
+    skibidi: TokenType.Skibidi,  // only skibidi for while loops
+    too: TokenType.Too,          // only too for for loops
     return: TokenType.Return,
 }
 

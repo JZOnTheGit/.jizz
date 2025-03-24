@@ -1,4 +1,4 @@
-import { FunctionDeclaration, IfStatement, Program, VarDeclaration } from "../../frontend/ast";
+import { FunctionDeclaration, ForStatement, IfStatement, Program, VarDeclaration, WhileStatement } from "../../frontend/ast";
 import { evaluate } from "../interpreter";
 import Environment from "../environment";
 import { RuntimeValue, MK_NULL, FunctionValue, BooleanValue} from "../values";
@@ -72,6 +72,52 @@ export function eval_if_statement(ifStmt: IfStatement, env: Environment): Runtim
     }
     
     return MK_NULL();
+}
+
+export function eval_while_statement(whileStmt: WhileStatement, env: Environment): RuntimeValue {
+    let result: RuntimeValue = MK_NULL();
+    
+    // Evaluate the condition
+    while (isTruthy(evaluate(whileStmt.condition, env))) {
+        // Create a new scope for each iteration
+        const loopEnv = new Environment(env);
+        
+        // Execute the body
+        for (const stmt of whileStmt.body) {
+            result = evaluate(stmt, loopEnv);
+        }
+    }
+    
+    return result;
+}
+
+export function eval_for_statement(forStmt: ForStatement, env: Environment): RuntimeValue {
+    // Create a new environment for the loop's scope
+    const outerLoopEnv = new Environment(env);
+    let result: RuntimeValue = MK_NULL();
+    
+    // Evaluate the initializer if it exists
+    if (forStmt.initializer) {
+        evaluate(forStmt.initializer, outerLoopEnv);
+    }
+    
+    // Loop while the condition is true (or forever if no condition)
+    while (!forStmt.condition || isTruthy(evaluate(forStmt.condition, outerLoopEnv))) {
+        // Create a new environment for each iteration's body
+        const iterationEnv = new Environment(outerLoopEnv);
+        
+        // Execute the body
+        for (const stmt of forStmt.body) {
+            result = evaluate(stmt, iterationEnv);
+        }
+        
+        // Evaluate the increment expression if it exists
+        if (forStmt.increment) {
+            evaluate(forStmt.increment, outerLoopEnv);
+        }
+    }
+    
+    return result;
 }
 
 // Helper function to determine if a value is truthy

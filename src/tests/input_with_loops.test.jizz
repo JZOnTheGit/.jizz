@@ -1,0 +1,107 @@
+// Example 1: Basic number guessing game
+buss("=== NUMBER GUESSING GAME ===");
+let secretNumber = 42;  // Hard-coded for test purposes
+buss("I'm thinking of a number between 1 and 100.");
+
+let guess = int(ask("Enter your guess: "));
+let attempts = 1;
+
+skibidi (guess != secretNumber) {
+    if (guess < secretNumber) {
+        buss("Too low! Try again.");
+    } else {
+        buss("Too high! Try again.");
+    }
+    guess = int(ask("Enter your guess: "));
+    attempts = attempts + 1;
+}
+
+buss("Congratulations! You guessed the number in", attempts, "attempts.");
+
+// Example 2: Accumulating values with a loop
+buss("\n=== SUM CALCULATOR ===");
+buss("Enter numbers to add. Enter 0 when you're done.");
+
+let sum = 0;
+let inputNum = int(ask("Enter a number: "));
+
+skibidi (inputNum != 0) {
+    sum = sum + inputNum;
+    buss("Current sum:", sum);
+    inputNum = int(ask("Enter another number (0 to finish): "));
+}
+
+buss("Final sum:", sum);
+
+// Example 3: Using too loops with user input for repetition
+buss("\n=== MULTIPLICATION TABLE GENERATOR ===");
+let tableSize = int(ask("Enter the size of the multiplication table: "));
+
+too (let i = 1; i <= tableSize; i = i + 1) {
+    let row = "";
+    too (let j = 1; j <= tableSize; j = j + 1) {
+        row = row + (i * j) + "   ";  // Using spaces instead of tab
+    }
+    buss(row);
+}
+
+// Example 4: Validating user input in a loop
+buss("\n=== INPUT VALIDATION EXAMPLE ===");
+let validInput = cap;
+let age = 0;
+
+skibidi (validInput == cap) {
+    let input = ask("Enter your age (must be between 1 and 120): ");
+    age = int(input);
+    
+    // Check if conversion worked
+    let conversionSucceeded = str(age) == input;
+    
+    // Check if in range (separate conditions)
+    let inValidRange = frfr;
+    if (age < 1) {
+        inValidRange = cap;
+    }
+    if (age > 120) {
+        inValidRange = cap;
+    }
+    
+    if (conversionSucceeded == cap) {
+        buss("Invalid input. Please enter a number.");
+    } else if (inValidRange == cap) {
+        buss("Invalid age. Must be between 1 and 120.");
+    } else {
+        validInput = frfr;
+    }
+}
+
+buss("Thank you! Your age is:", age);
+
+// Example 5: Creating a simple menu system
+buss("\n=== MENU SYSTEM EXAMPLE ===");
+let running = frfr;
+
+skibidi (running == frfr) {
+    buss("\nMENU OPTIONS:");
+    buss("1. Say Hello");
+    buss("2. Count to 5");
+    buss("3. Show Current Time");
+    buss("4. Exit");
+    
+    let choice = int(ask("Enter your choice (1-4): "));
+    
+    if (choice == 1) {
+        buss("Hello, welcome to JIZZ language!");
+    } else if (choice == 2) {
+        too (let i = 1; i <= 5; i = i + 1) {
+            buss("Count:", i);
+        }
+    } else if (choice == 3) {
+        buss("Current time (ms since epoch):", time());
+    } else if (choice == 4) {
+        buss("Goodbye!");
+        running = cap;
+    } else {
+        buss("Invalid choice. Please select 1-4.");
+    }
+} 

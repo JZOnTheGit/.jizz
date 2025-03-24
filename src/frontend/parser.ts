@@ -60,6 +60,10 @@ export default class Parser {
                 return this.parse_function_declaration();
             case TokenType.If:
                 return this.parse_if_statement();
+            case TokenType.Skibidi:
+                return this.parse_while_statement();
+            case TokenType.Too:
+                return this.parse_for_statement();
             case TokenType.Return:
                 return this.parse_return_statement();
             default: {
@@ -507,5 +511,120 @@ export default class Parser {
             kind: "ReturnStatement",
             value
         } as ReturnStatement;
+    }
+
+    private parse_while_statement(): Stmt {
+        const skibidiToken = this.at();  // Store the 'skibidi' token for error reporting
+        this.eat(); // eat 'skibidi'
+        
+        // Check for opening parenthesis
+        if (this.at().type !== TokenType.OpenParen) {
+            throw `Error at line ${skibidiToken.line}: Expected opening parenthesis after skibidi keyword`;
+        }
+        this.eat(); // eat '('
+        
+        const condition = this.parse_expr();
+        
+        // Check for closing parenthesis
+        if (this.at().type !== TokenType.CloseParen) {
+            throw `Error at line ${skibidiToken.line}: Expected closing parenthesis after skibidi condition`;
+        }
+        this.eat(); // eat ')'
+        
+        // Check for opening brace
+        if (this.at().type !== TokenType.OpenBrace) {
+            throw `Error at line ${skibidiToken.line}: Expected opening brace after skibidi condition`;
+        }
+        this.eat(); // eat '{'
+        
+        const body: Stmt[] = [];
+        while (this.at().type !== TokenType.EOF && this.at().type !== TokenType.CloseBrace) {
+            body.push(this.parse_stmt());
+        }
+        
+        // Check for closing brace
+        if (this.at().type !== TokenType.CloseBrace) {
+            throw `Error at line ${skibidiToken.line}: Missing closing brace for skibidi statement`;
+        }
+        this.eat(); // eat '}'
+        
+        return {
+            kind: "WhileStatement",
+            condition,
+            body,
+        };
+    }
+
+    private parse_for_statement(): Stmt {
+        const tooToken = this.at();  // Store the 'too' token for error reporting
+        this.eat(); // eat 'too'
+        
+        // Check for opening parenthesis
+        if (this.at().type !== TokenType.OpenParen) {
+            throw `Error at line ${tooToken.line}: Expected opening parenthesis after too keyword`;
+        }
+        this.eat(); // eat '('
+        
+        // Parse initializer - either a var declaration or an expression
+        let initializer: Stmt | undefined;
+        if (this.at().type === TokenType.Semicolon) {
+            // No initializer
+            this.eat(); // eat semicolon
+        } else if (this.at().type === TokenType.Let || this.at().type === TokenType.Const) {
+            initializer = this.parse_var_declaration();
+        } else {
+            initializer = this.parse_expr();
+            if (this.at().type !== TokenType.Semicolon) {
+                throw `Error at line ${tooToken.line}: Expected semicolon after too initializer`;
+            }
+            this.eat(); // eat semicolon
+        }
+        
+        // Parse condition
+        let condition: Expr | undefined;
+        if (this.at().type !== TokenType.Semicolon) {
+            condition = this.parse_expr();
+        }
+        
+        if (this.at().type !== TokenType.Semicolon) {
+            throw `Error at line ${tooToken.line}: Expected semicolon after too condition`;
+        }
+        this.eat(); // eat semicolon
+        
+        // Parse increment
+        let increment: Expr | undefined;
+        if (this.at().type !== TokenType.CloseParen) {
+            increment = this.parse_expr();
+        }
+        
+        if (this.at().type !== TokenType.CloseParen) {
+            throw `Error at line ${tooToken.line}: Expected closing parenthesis after too increment`;
+        }
+        this.eat(); // eat ')'
+        
+        // Check for opening brace
+        if (this.at().type !== TokenType.OpenBrace) {
+            throw `Error at line ${tooToken.line}: Expected opening brace after too header`;
+        }
+        this.eat(); // eat '{'
+        
+        const body: Stmt[] = [];
+        while (this.at().type !== TokenType.EOF && this.at().type !== TokenType.CloseBrace) {
+            body.push(this.parse_stmt());
+        }
+        
+        // Check for closing brace
+        if (this.at().type !== TokenType.CloseBrace) {
+            throw `Error at line ${tooToken.line}: Missing closing brace for too statement`;
+        }
+        this.eat(); // eat '}'
+        
+        return {
+            kind: "ForStatement",
+            initializer,
+            condition,
+            increment,
+            body,
+        };
     }
 }

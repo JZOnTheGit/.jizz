@@ -1,0 +1,13 @@
+// Test using skibidi keyword
+buss("Testing skibidi loop:");
+let count1 = 1;
+skibidi (count1 <= 3) {
+    buss("skibidi count:", count1);
+    count1 = count1 + 1;
+}
+
+// Test using too keyword
+buss("\nTesting too loop:");
+too (let i = 1; i <= 3; i = i + 1) {
+    buss("too iteration:", i);
+} 

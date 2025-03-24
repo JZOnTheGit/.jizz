@@ -7,6 +7,26 @@ export function createGlobalEnv(){
     env.declareVar("cap", MK_BOOL(false), true);
     env.declareVar("null", MK_NULL(), true);
 
+    // Add Math library functions
+    // Create Math object
+    const mathObj = {type: "object", properties: new Map()} as ObjectValue;
+    
+    // Math.floor
+    mathObj.properties.set("floor", MK_NATIVE_FN((args, _) => {
+        if (args.length === 0) {
+            throw "Math.floor() requires one argument";
+        }
+        
+        if (args[0].type !== "number") {
+            throw `Cannot floor non-number value`;
+        }
+        
+        const value = Math.floor((args[0] as NumberValue).value);
+        return MK_NUMBER(value);
+    }));
+    
+    env.declareVar("Math", mathObj, true);
+
     // Add ask function for user input
     env.declareVar("ask", MK_NATIVE_FN((args, _) => {
         const prompt = args.length > 0 && args[0].type === "string" 
