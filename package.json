@@ -1,11 +1,11 @@
 {
   "name": "jizz-lang",
-  "version": "1.0.0",
-  "description": "JIZZ Programming Language - A modern, expressive programming language with clean syntax",
+  "version": "1.0.5",
+  "description": "JIZZ Programming Language - A modern, expressive programming language with clean syntax frfr",
   "main": "dist/cli.js",
   "type": "commonjs",
   "bin": {
-    "jizz": "dist/cli.js"
+    "jizz": "./dist/cli.js"
   },
   "scripts": {
     "clean": "rm -rf dist",
@@ -21,16 +21,16 @@
     "compiler",
     "repl"
   ],
-  "author": "",
+  "author": "Jainesh Singh",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yourusername/jizz-lang.git"
+    "url": "git+https://github.com/JZOnTheGit/.jizz.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/jizz-lang/issues"
+    "url": "https://github.com/JZOnTheGit/.jizz/issues"
   },
-  "homepage": "https://github.com/yourusername/jizz-lang#readme",
+  "homepage": "https://github.com/JZOnTheGit/.jizz#readme",
   "engines": {
     "node": ">=14.0.0"
   },

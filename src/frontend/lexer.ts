@@ -93,7 +93,6 @@ export function tokensize(sourceCode: string): Token[] {
             continue;
         }
 
-        console.log(`Tokenizing line ${currentLine}: ${line}`);
         let i = 0;
         while (i < line.length) {
             if (isskippable(line[i])) {
@@ -122,73 +121,47 @@ export function tokensize(sourceCode: string): Token[] {
                     throw `Error at line ${currentLine}: Unterminated string literal`;
                 }
                 i++; // Move past the closing quote
-                const token = { type: TokenType.String, value: value, line: currentLine };
-                console.log(`Generated token: ${TokenType[token.type]} (${token.value})`);
-                tokens.push(token);
+                tokens.push({ type: TokenType.String, value: value, line: currentLine });
                 continue;
             }
 
             // Handle operators and other single-character tokens
             if (line[i] === '(') {
-                const token = { type: TokenType.OpenParen, value: line[i], line: currentLine };
-                console.log(`Generated token: ${TokenType[token.type]} (${token.value})`);
-                tokens.push(token);
+                tokens.push({ type: TokenType.OpenParen, value: line[i], line: currentLine });
                 i++;
             } else if (line[i] === ')') {
-                const token = { type: TokenType.CloseParen, value: line[i], line: currentLine };
-                console.log(`Generated token: ${TokenType[token.type]} (${token.value})`);
-                tokens.push(token);
+                tokens.push({ type: TokenType.CloseParen, value: line[i], line: currentLine });
                 i++;
             } else if (line[i] === '{') {
-                const token = { type: TokenType.OpenBrace, value: line[i], line: currentLine };
-                console.log(`Generated token: ${TokenType[token.type]} (${token.value})`);
-                tokens.push(token);
+                tokens.push({ type: TokenType.OpenBrace, value: line[i], line: currentLine });
                 i++;
             } else if (line[i] === '}') {
-                const token = { type: TokenType.CloseBrace, value: line[i], line: currentLine };
-                console.log(`Generated token: ${TokenType[token.type]} (${token.value})`);
-                tokens.push(token);
+                tokens.push({ type: TokenType.CloseBrace, value: line[i], line: currentLine });
                 i++;
             } else if (line[i] === '[') {
-                const token = { type: TokenType.OpenBracket, value: line[i], line: currentLine };
-                console.log(`Generated token: ${TokenType[token.type]} (${token.value})`);
-                tokens.push(token);
+                tokens.push({ type: TokenType.OpenBracket, value: line[i], line: currentLine });
                 i++;
             } else if (line[i] === ']') {
-                const token = { type: TokenType.CloseBracket, value: line[i], line: currentLine };
-                console.log(`Generated token: ${TokenType[token.type]} (${token.value})`);
-                tokens.push(token);
+                tokens.push({ type: TokenType.CloseBracket, value: line[i], line: currentLine });
                 i++;
             } else if (line[i] === ':') {
-                const token = { type: TokenType.Colon, value: line[i], line: currentLine };
-                console.log(`Generated token: ${TokenType[token.type]} (${token.value})`);
-                tokens.push(token);
+                tokens.push({ type: TokenType.Colon, value: line[i], line: currentLine });
                 i++;
             } else if (line[i] === ';') {
-                const token = { type: TokenType.Semicolon, value: line[i], line: currentLine };
-                console.log(`Generated token: ${TokenType[token.type]} (${token.value})`);
-                tokens.push(token);
+                tokens.push({ type: TokenType.Semicolon, value: line[i], line: currentLine });
                 i++;
             } else if (line[i] === ',') {
-                const token = { type: TokenType.Comma, value: line[i], line: currentLine };
-                console.log(`Generated token: ${TokenType[token.type]} (${token.value})`);
-                tokens.push(token);
+                tokens.push({ type: TokenType.Comma, value: line[i], line: currentLine });
                 i++;
             } else if (line[i] === '.') {
-                const token = { type: TokenType.Dot, value: line[i], line: currentLine };
-                console.log(`Generated token: ${TokenType[token.type]} (${token.value})`);
-                tokens.push(token);
+                tokens.push({ type: TokenType.Dot, value: line[i], line: currentLine });
                 i++;
             } else if (line[i] === '=') {
                 if (i + 1 < line.length && line[i + 1] === '=') {
-                    const token = { type: TokenType.ComparisonOperator, value: "==", line: currentLine };
-                    console.log(`Generated token: ${TokenType[token.type]} (${token.value})`);
-                    tokens.push(token);
+                    tokens.push({ type: TokenType.ComparisonOperator, value: "==", line: currentLine });
                     i += 2;
                 } else {
-                    const token = { type: TokenType.Equals, value: "=", line: currentLine };
-                    console.log(`Generated token: ${TokenType[token.type]} (${token.value})`);
-                    tokens.push(token);
+                    tokens.push({ type: TokenType.Equals, value: "=", line: currentLine });
                     i++;
                 }
             } else if (line[i] === '+' || line[i] === '-' || line[i] === '*' || line[i] === '/') {
@@ -201,9 +174,7 @@ export function tokensize(sourceCode: string): Token[] {
                     continue;
                 }
                 
-                const token = { type: TokenType.BinaryOperator, value: line[i], line: currentLine };
-                console.log(`Generated token: ${TokenType[token.type]} (${token.value})`);
-                tokens.push(token);
+                tokens.push({ type: TokenType.BinaryOperator, value: line[i], line: currentLine });
                 i++;
             } else if ("<>!".includes(line[i])) {
                 let operator = line[i];
@@ -213,9 +184,7 @@ export function tokensize(sourceCode: string): Token[] {
                     operator += '=';
                     i++;
                 }
-                const token = { type: TokenType.ComparisonOperator, value: operator, line: currentLine };
-                console.log(`Generated token: ${TokenType[token.type]} (${token.value})`);
-                tokens.push(token);
+                tokens.push({ type: TokenType.ComparisonOperator, value: operator, line: currentLine });
             } else if (isint(line[i]) || (line[i] === '.' && i + 1 < line.length && isint(line[i + 1]))) {
                 let num = "";
                 let hasDecimal = false;
@@ -238,9 +207,7 @@ export function tokensize(sourceCode: string): Token[] {
                     }
                     i++;
                 }
-                const token = { type: TokenType.Number, value: num, line: currentLine };
-                console.log(`Generated token: ${TokenType[token.type]} (${token.value})`);
-                tokens.push(token);
+                tokens.push({ type: TokenType.Number, value: num, line: currentLine });
             } else if (isalpha(line[i])) {
                 let ident = "";
                 while (i < line.length && isvalididentifier(line[i])) {
@@ -250,13 +217,9 @@ export function tokensize(sourceCode: string): Token[] {
                 
                 const reserved = KEYWORDS[ident];
                 if (reserved) {
-                    const token = { type: reserved, value: ident, line: currentLine };
-                    console.log(`Generated token: ${TokenType[token.type]} (${token.value})`);
-                    tokens.push(token);
+                    tokens.push({ type: reserved, value: ident, line: currentLine });
                 } else {
-                    const token = { type: TokenType.Identifier, value: ident, line: currentLine };
-                    console.log(`Generated token: ${TokenType[token.type]} (${token.value})`);
-                    tokens.push(token);
+                    tokens.push({ type: TokenType.Identifier, value: ident, line: currentLine });
                 }
             } else if (iswhitespace(line[i])) {
                 i++;
@@ -267,9 +230,7 @@ export function tokensize(sourceCode: string): Token[] {
         currentLine++;
     }
 
-    const eofToken = { type: TokenType.EOF, value: "EndOfFile", line: currentLine };
-    console.log(`Generated token: ${TokenType[eofToken.type]} (${eofToken.value})`);
-    tokens.push(eofToken);
+    tokens.push({ type: TokenType.EOF, value: "EndOfFile", line: currentLine });
     return tokens;
 }
 

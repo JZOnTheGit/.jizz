@@ -1,5 +1,9 @@
 # JIZZ Programming Language
 
+[![npm version](https://img.shields.io/npm/v/jizz-lang.svg)](https://www.npmjs.com/package/jizz-lang)
+[![npm downloads](https://img.shields.io/npm/dm/jizz-lang.svg)](https://www.npmjs.com/package/jizz-lang)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 ```
      ██╗██╗███████╗███████╗
      ██║██║╚══███╔╝╚══███╔╝
@@ -11,8 +15,21 @@
 
 JIZZ is a modern programming language designed for simplicity and expressiveness. It features a clean syntax, powerful string manipulation, and intuitive error messages.
 
-[![npm version](https://badge.fury.io/js/jizz-lang.svg)](https://badge.fury.io/js/jizz-lang)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+## Quick Start
+
+```bash
+# Install globally
+npm install -g jizz-lang
+
+# Run a file
+jizz run your-file.jizz
+
+# Start REPL
+jizz repl
+
+# View examples
+jizz examples
+```
 
 ## Features
 
@@ -26,38 +43,6 @@ JIZZ is a modern programming language designed for simplicity and expressiveness
 - Variables and constants
 - Object literals with property access
 - Rich standard library
-
-## Installation
-
-```bash
-npm install -g jizz-lang
-```
-
-## Usage
-
-### Running a JIZZ file
-
-Create a file with the `.jizz` extension and run it:
-
-```bash
-jizz run your-file.jizz
-```
-
-### Interactive REPL
-
-Start the interactive shell:
-
-```bash
-jizz repl
-```
-
-### View Examples
-
-See example JIZZ code:
-
-```bash
-jizz examples
-```
 
 ## Language Features
 
