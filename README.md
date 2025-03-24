@@ -47,6 +47,8 @@ npm update -g jizz-lang
 - Object literals with property access
 - Rich standard library
 - Custom boolean keywords (frfr for true, cap for false)
+- User input with ask() function
+- Type conversion functions (int, str)
 
 ## Language Features
 
@@ -124,6 +126,29 @@ if (canDrive == frfr) {
 }
 ```
 
+### User Input and Type Conversion
+
+```javascript
+// Basic input
+let name = ask("What's your name? ");
+buss("Hello, " + name + "!");
+
+// Input with type conversion
+let age = int(ask("How old are you? "));
+if (age >= 18) {
+    buss("You're an adult!");
+} else {
+    buss("You're still young!");
+}
+
+// Type conversion examples
+let numStr = "42";
+let num = int(numStr);      // Convert string to integer
+let strNum = str(num);      // Convert number to string
+let boolStr = str(frfr);    // Converts to "frfr"
+let capStr = str(cap);      // Converts to "cap"
+```
+
 ## Error Handling
 
 JIZZ provides clear error messages with line numbers:
@@ -163,4 +188,4 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. 
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

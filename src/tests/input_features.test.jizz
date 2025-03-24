@@ -1,0 +1,27 @@
+// Test string input
+let name = ask("Enter test name: ");
+buss("Got name:", name);
+
+// Test number input and conversion
+let numStr = ask("Enter a number: ");
+let num = int(numStr);
+buss("Got number:", num);
+
+// Test type conversions
+let testNum = 42;
+let testBool = frfr;
+let testNull = null;
+
+// Test str() conversions
+buss("Number to string:", str(testNum));  // Should output: 42
+buss("Boolean to string:", str(testBool)); // Should output: frfr
+buss("Null to string:", str(testNull));    // Should output: null
+
+// Test int() conversions
+buss("String to int:", int("123"));        // Should output: 123
+buss("Float to int:", int(45.67));         // Should output: 45
+
+// Test error cases (commented out to not break automated tests)
+// Uncomment to test error handling:
+// let invalidNum = int("not a number");    // Should throw error
+// let noArgs = int();                      // Should throw error 

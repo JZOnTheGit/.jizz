@@ -1,4 +1,4 @@
-import { MK_BOOL, MK_NATIVE_FN, MK_NULL, MK_NUMBER, RuntimeValue, NumberValue, StringValue, BooleanValue, ObjectValue } from "./values";
+import { MK_BOOL, MK_NATIVE_FN, MK_NULL, MK_NUMBER, RuntimeValue, NumberValue, StringValue, BooleanValue, ObjectValue, MK_STRING } from "./values";
 import { StringPrototype } from "./stdlib/string";
 
 export function createGlobalEnv(){
@@ -6,6 +6,67 @@ export function createGlobalEnv(){
     env.declareVar("frfr", MK_BOOL(true), true);
     env.declareVar("cap", MK_BOOL(false), true);
     env.declareVar("null", MK_NULL(), true);
+
+    // Add ask function for user input
+    env.declareVar("ask", MK_NATIVE_FN((args, _) => {
+        const prompt = args.length > 0 && args[0].type === "string" 
+            ? (args[0] as StringValue).value 
+            : "";
+        
+        // Use readline-sync for synchronous input
+        const readline = require('readline-sync');
+        const input = readline.question(prompt);
+        return MK_STRING(input);
+    }), true);
+
+    // Add int conversion function
+    env.declareVar("int", MK_NATIVE_FN((args, _) => {
+        if (args.length === 0) {
+            throw "int() requires one argument";
+        }
+        
+        let value;
+        if (args[0].type === "string") {
+            value = parseInt((args[0] as StringValue).value);
+        } else if (args[0].type === "number") {
+            value = Math.floor((args[0] as NumberValue).value);
+        } else {
+            throw `Cannot convert ${args[0].type} to int`;
+        }
+        
+        if (isNaN(value)) {
+            throw `Cannot convert to int: invalid input`;
+        }
+        
+        return MK_NUMBER(value);
+    }), true);
+
+    // Add str conversion function
+    env.declareVar("str", MK_NATIVE_FN((args, _) => {
+        if (args.length === 0) {
+            throw "str() requires one argument";
+        }
+        
+        let value;
+        switch (args[0].type) {
+            case "string":
+                value = (args[0] as StringValue).value;
+                break;
+            case "number":
+                value = (args[0] as NumberValue).value.toString();
+                break;
+            case "boolean":
+                value = (args[0] as BooleanValue).value ? "frfr" : "cap";
+                break;
+            case "null":
+                value = "null";
+                break;
+            default:
+                value = "[" + args[0].type + "]";
+        }
+        
+        return MK_STRING(value);
+    }), true);
 
     //define a native builtin method
     env.declareVar("buss", MK_NATIVE_FN((args, scope) => {
