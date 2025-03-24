@@ -1,5 +1,5 @@
 {
-  "name": "jizz-lang",
+  "name": "@jzonthegit/jizz",
   "version": "1.1.2",
   "description": "JIZZ Programming Language - A modern, expressive programming language with clean syntax frfr",
   "main": "dist/src/cli.js",
@@ -14,9 +14,6 @@
     "pretest": "cp src/tests/*.test.jizz dist/src/tests/",
     "test": "node dist/src/tests/run_tests.js",
     "prepublishOnly": "npm run build && npm test",
-    "publish-npm": "npm publish --registry https://registry.npmjs.org/",
-    "publish-github": "npm publish --registry https://npm.pkg.github.com/",
-    "publish-all": "npm run publish-npm && npm run publish-github",
     "postinstall": "node scripts/install-icons.js"
   },
   "keywords": [
@@ -54,5 +51,8 @@
   "devDependencies": {
     "@types/node": "^18.11.9",
     "typescript": "^4.8.4"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 } 

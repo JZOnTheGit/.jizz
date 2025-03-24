@@ -8,7 +8,7 @@ function runTest(testFile: string): boolean {
     console.log(chalk.cyan(`\nRunning test: ${testFile}`));
     console.log(chalk.gray('----------------------------------------'));
 
-    const result = spawnSync('node', ['./dist/cli.js', 'run', `./src/tests/${testFile}`], {
+    const result = spawnSync('node', ['./dist/src/cli.js', 'run', `./src/tests/${testFile}`], {
         stdio: 'inherit',
         cwd: process.cwd()
     });

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" version="1.1" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2d2d2d"/>
+      <stop offset="100%" style="stop-color:#1a1a1a"/>
+    </linearGradient>
+ </defs>
+ <!-- File shape -->
+ <path d="M96 0C60.7 0 32 28.7 32 64V448c0 35.3 28.7 64 64 64H416c35.3 0 64-28.7 64-64V160H352c-17.7 0-32-14.3-32-32V0H96zM384 0V128H512L384 0z" fill="url(#bg)"/>
+ <!-- JIZZ text -->
+ <g fill="#fff" transform="translate(96, 220)">
+    <text x="0" y="0" font-family="Arial Black" font-size="120" fill="#fff">JIZZ</text>
+ </g>
+ <!-- Code lines -->
+ <g stroke="#fff" stroke-width="4" stroke-linecap="round">
+    <line x1="96" y1="320" x2="416" y2="320"/>
+    <line x1="96" y1="360" x2="320" y2="360"/>
+    <line x1="96" y1="400" x2="256" y2="400"/>
+ </g>
+</svg> 
