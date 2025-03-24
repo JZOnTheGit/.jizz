@@ -62,6 +62,9 @@ npm update -g jizz-lang
 - Custom loop constructs (`skibidi` and `too` loops)
 - User input with ask() function
 - Type conversion functions (int, str)
+- Logical operators (AND, OR, NOT) with short-circuit evaluation
+- Comparison operators for complex conditions
+- Array support with numeric indices
 
 ## Language Features
 
@@ -162,83 +165,48 @@ let boolStr = str(frfr);    // Converts to "frfr"
 let capStr = str(cap);      // Converts to "cap"
 ```
 
-### Loops (BrainRot Edition)
+### Logical Operators
 
 ```javascript
-// Skibidi loop (instead of while loop)
-let count = 1;
-skibidi (count <= 5) {
-    buss("Count:", count);
-    count = count + 1;
+// NOT operator (!)
+let isActive = frfr;
+let isInactive = !isActive;  // false
+buss("!true =", !isActive);  // Output: !true = false
+
+// AND operator (&&)
+let isAdult = frfr;
+let hasID = frfr;
+let canBuyAlcohol = isAdult && hasID;  // true
+buss("Adult AND has ID:", canBuyAlcohol);
+
+// OR operator (||)
+let hasTicket = cap;
+let isVIP = frfr;
+let canEnter = hasTicket || isVIP;  // true
+buss("Has ticket OR is VIP:", canEnter);
+
+// Comparison with logical operators
+let age = 25;
+let height = 180;
+if (age > 18 && height > 160) {
+    buss("Can ride all attractions!");
 }
 
-// Too loop (instead of for loop)
-too (let i = 0; i < 5; i = i + 1) {
-    buss("Iteration:", i);
+// Short-circuit evaluation
+let result = cap && functionShouldNotRun();  // Function is not called
+buss("Short-circuit AND:", result);  // false
+
+result = frfr || functionShouldNotRun();  // Function is not called
+buss("Short-circuit OR:", result);  // true
+```
+
+// Define the function referenced above
+fn functionShouldNotRun() {
+    buss("This function should not run!");
+    return "Function ran";
 }
-
-// Nested loops
-too (let i = 1; i <= 3; i = i + 1) {
-    too (let j = 1; j <= 3; j = j + 1) {
-        buss(i, "x", j, "=", i * j);
-    }
-}
-
-// Loop with user input
-let total = 0;
-let num = int(ask("Enter a number (0 to stop): "));
-skibidi (num != 0) {
-    total = total + num;
-    num = int(ask("Enter a number (0 to stop): "));
-}
-buss("Sum:", total);
 ```
 
-## Why JIZZ with BrainRot Syntax?
-
-- **Entertaining:** Makes programming sessions more fun and engaging
-- **Memorable:** Unusual syntax makes code patterns more memorable
-- **Educational:** Great for teaching programming concepts with humor
-- **Conversation Starter:** Share your JIZZ code and get reactions
-- **Stress Relief:** Coding with meme language reduces stress
-
-## Error Handling
-
-JIZZ provides clear error messages with line numbers:
+### Loops (BrainRot Edition)
 
 ```
-Error at line 5: Unterminated string literal
-Error at line 8: Missing semicolon after variable declaration
-Error at line 12: Cannot resolve variable as it's not defined
-```
-
-## Development
-
-To build from source:
-
-```bash
-git clone https://github.com/yourusername/jizz-lang.git
-cd jizz-lang
-npm install
-npm run build
-```
-
-Run tests:
-
-```bash
-npm test
-```
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

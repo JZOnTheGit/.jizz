@@ -8,6 +8,8 @@ export type NodeType =
 | "AssignmentExpr"
 | "MemberExpr"
 | "CallExpr"
+| "LogicalExpr"
+| "TernaryExpr"
 
 //statements
 | "NumericLiteral" 
@@ -20,6 +22,7 @@ export type NodeType =
 | "WhileStatement"
 | "ForStatement"
 | "ReturnStatement"
+| "ArrayLiteral"
 
 | "Property"
 | "ObjectLiteral";
@@ -134,6 +137,31 @@ export interface ForStatement extends Stmt {
 export interface ReturnStatement extends Stmt {
     kind: "ReturnStatement";
     value?: Expr;
+}
+
+export interface LogicalExpr extends Expr {
+    kind: "LogicalExpr";
+    left: Expr;
+    right: Expr;
+    operator: string;  // "&&", "||", "!"
+}
+
+export interface TernaryExpr extends Expr {
+    kind: "TernaryExpr";
+    condition: Expr;
+    trueExpr: Expr;
+    falseExpr: Expr;
+}
+
+export interface ArrayLiteral extends Expr {
+    kind: "ArrayLiteral";
+    elements: Expr[];
+}
+
+export interface UnaryExpr extends Expr {
+    kind: "UnaryExpr";
+    operator: string;  // Currently just "!" for logical NOT
+    operand: Expr;
 }
 
 

@@ -10,6 +10,7 @@ export enum TokenType {
     Equals, //=
     BinaryOperator, //+ - * / %
     ComparisonOperator, // < > <= >= == !=
+    LogicalOperator, // && || !
     
     // Grouping Tokens
     OpenParen, //(
@@ -168,7 +169,7 @@ export function tokensize(sourceCode: string): Token[] {
                     tokens.push({ type: TokenType.Equals, value: "=", line: currentLine });
                     i++;
                 }
-            } else if (line[i] === '+' || line[i] === '-' || line[i] === '*' || line[i] === '/') {
+            } else if (line[i] === '+' || line[i] === '-' || line[i] === '*' || line[i] === '/' || line[i] === '%') {
                 // Check for comments first
                 if (line[i] === '/' && line[i + 1] === '/') {
                     // Skip until end of line
@@ -180,7 +181,21 @@ export function tokensize(sourceCode: string): Token[] {
                 
                 tokens.push({ type: TokenType.BinaryOperator, value: line[i], line: currentLine });
                 i++;
-            } else if ("<>!".includes(line[i])) {
+            } else if (line[i] === '&' && i + 1 < line.length && line[i + 1] === '&') {
+                tokens.push({ type: TokenType.LogicalOperator, value: "&&", line: currentLine });
+                i += 2;
+            } else if (line[i] === '|' && i + 1 < line.length && line[i + 1] === '|') {
+                tokens.push({ type: TokenType.LogicalOperator, value: "||", line: currentLine });
+                i += 2;
+            } else if (line[i] === '!') {
+                if (i + 1 < line.length && line[i + 1] === '=') {
+                    tokens.push({ type: TokenType.ComparisonOperator, value: "!=", line: currentLine });
+                    i += 2;
+                } else {
+                    tokens.push({ type: TokenType.LogicalOperator, value: "!", line: currentLine });
+                    i++;
+                }
+            } else if ("<>".includes(line[i])) {
                 let operator = line[i];
                 i++;
                 

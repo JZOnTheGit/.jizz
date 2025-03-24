@@ -1,0 +1,51 @@
+// Final test with only working features
+
+// 1. Logical Operators
+buss("\n==== Testing Logical Operators ====");
+
+let a = frfr;  // true
+let b = cap;   // false
+
+// NOT operator
+buss("!true =", !a);
+buss("!false =", !b);
+
+// Comparison operators
+buss("5 > 3 =", 5 > 3);
+buss("10 == 10 =", 10 == 10);
+
+// AND and OR operators
+let result = (5 < 10) && (3 > 1);
+buss("(5 < 10) && (3 > 1) =", result);
+
+result = (5 > 10) || (3 < 10);
+buss("(5 > 10) || (3 < 10) =", result);
+
+// 2. Objects (without property access)
+buss("\n==== Testing Objects ====");
+let person = { 
+    name: "John",
+    age: 30,
+    isStudent: cap
+};
+buss("Person object:", person);
+
+// 3. Arrays (without property access)
+buss("\n==== Testing Arrays ====");
+let colors = ["red", "green", "blue"];
+buss("Colors array:", colors);
+
+// 4. Short-circuit evaluation
+buss("\n==== Testing Short-Circuit Evaluation ====");
+
+// Helper function that shouldn't run due to short-circuit
+fn functionThatShouldNotRun() {
+    buss("This function should not run!");
+    return "Function ran";
+}
+
+result = cap && functionThatShouldNotRun();
+buss("false && function() =", result);  // Should be false without calling function
+
+result = frfr || functionThatShouldNotRun();
+buss("true || function() =", result);   // Should be true without calling function 

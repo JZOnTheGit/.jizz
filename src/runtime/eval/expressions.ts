@@ -1,6 +1,6 @@
-import { RuntimeValue, MK_NULL, NumberValue, ObjectValue, NativeFnValue, FunctionValue, StringValue, MK_STRING, MK_BOOL} from "../values";
+import { RuntimeValue, MK_NULL, NumberValue, ObjectValue, NativeFnValue, FunctionValue, StringValue, MK_STRING, MK_BOOL, BooleanValue} from "../values";
 import Environment from "../environment";
-import { AssignmentExpr, BinaryExpr, CallExpr, Identifier, MemberExpr, ObjectLiteral} from "../../frontend/ast";
+import { AssignmentExpr, BinaryExpr, CallExpr, Identifier, MemberExpr, ObjectLiteral, LogicalExpr, TernaryExpr, ArrayLiteral, UnaryExpr} from "../../frontend/ast";
 import { evaluate } from "../interpreter";
 
 function eval_numeric_binary_expr (leftHandSide: NumberValue, rightHandSide: NumberValue, operator: string): RuntimeValue {
@@ -36,8 +36,27 @@ function eval_numeric_binary_expr (leftHandSide: NumberValue, rightHandSide: Num
 }
 
 
-export function eval_binary_expr(binop: BinaryExpr, env: Environment): RuntimeValue{
+export function eval_binary_expr(binop: BinaryExpr, env: Environment): RuntimeValue {
     const leftHandSide = evaluate(binop.left, env);
+    
+    // Short-circuit evaluation for logical operators
+    if (binop.operator === "&&") {
+        if (!isTruthy(leftHandSide)) {
+            return leftHandSide; // Return the falsy value
+        }
+        const rightHandSide = evaluate(binop.right, env);
+        return rightHandSide;
+    } 
+    
+    if (binop.operator === "||") {
+        if (isTruthy(leftHandSide)) {
+            return leftHandSide; // Return the truthy value
+        }
+        const rightHandSide = evaluate(binop.right, env);
+        return rightHandSide;
+    }
+    
+    // Non-short-circuit operators - evaluate both sides
     const rightHandSide = evaluate(binop.right, env);
 
     // Handle string operations
@@ -74,7 +93,7 @@ export function eval_binary_expr(binop: BinaryExpr, env: Environment): RuntimeVa
         return eval_numeric_binary_expr(leftHandSide as NumberValue, rightHandSide as NumberValue, binop.operator);
     }
 
-    //one or both are NULL
+    // One or both are NULL
     return MK_NULL();
 }
 
@@ -175,5 +194,95 @@ export function eval_member_expr(expr: MemberExpr, env: Environment): RuntimeVal
         }
         
         return objectValue.properties.get(propName) as RuntimeValue;
+    }
+}
+
+export function eval_logical_expr(expr: LogicalExpr, env: Environment): RuntimeValue {
+    // Handle logical operators: &&, ||, !
+    const operator = expr.operator;
+    
+    // Special case for ! (NOT) operator which is unary
+    if (operator === "!") {
+        const rightVal = evaluate(expr.right, env);
+        return MK_BOOL(!isTruthy(rightVal));
+    }
+    
+    // For && and ||, evaluate the left side first
+    const leftVal = evaluate(expr.left, env);
+    
+    // Short-circuit evaluation for && and ||
+    if (operator === "&&") {
+        // If left is falsy, return it without evaluating right
+        if (!isTruthy(leftVal)) {
+            return leftVal;
+        }
+        // Otherwise, return right value
+        return evaluate(expr.right, env);
+    } 
+    else if (operator === "||") {
+        // If left is truthy, return it without evaluating right
+        if (isTruthy(leftVal)) {
+            return leftVal;
+        }
+        // Otherwise, return right value
+        return evaluate(expr.right, env);
+    }
+    
+    return MK_NULL(); // Fallback
+}
+
+export function eval_ternary_expr(expr: TernaryExpr, env: Environment): RuntimeValue {
+    // Evaluate the condition
+    const condition = evaluate(expr.condition, env);
+    
+    // Based on condition's truthiness, evaluate and return either true or false expression
+    if (isTruthy(condition)) {
+        return evaluate(expr.trueExpr, env);
+    } else {
+        return evaluate(expr.falseExpr, env);
+    }
+}
+
+export function eval_array_literal(expr: ArrayLiteral, env: Environment): RuntimeValue {
+    // Create an array object
+    const array = { type: "object", properties: new Map() } as ObjectValue;
+    
+    // Evaluate each element and store in the array
+    for (let i = 0; i < expr.elements.length; i++) {
+        const value = evaluate(expr.elements[i], env);
+        array.properties.set(i.toString(), value);
+    }
+    
+    // Set the length property
+    array.properties.set("length", { type: "number", value: expr.elements.length } as NumberValue);
+    
+    return array;
+}
+
+// Helper function to determine if a value is truthy
+function isTruthy(value: RuntimeValue): boolean {
+    switch (value.type) {
+        case "boolean":
+            return (value as BooleanValue).value;
+        case "number":
+            return (value as NumberValue).value !== 0;
+        case "string":
+            return (value as StringValue).value !== "";
+        case "null":
+            return false;
+        default:
+            return true;
+    }
+}
+
+export function eval_unary_expr(expr: UnaryExpr, env: Environment): RuntimeValue {
+    const operand = evaluate(expr.operand, env);
+    
+    switch (expr.operator) {
+        case "!":
+            // Logical NOT
+            return MK_BOOL(!isTruthy(operand));
+        default:
+            throw `Unsupported unary operator: ${expr.operator}`;
     }
 }

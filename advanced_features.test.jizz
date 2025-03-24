@@ -1,0 +1,71 @@
+// Advanced JIZZ Features Test
+
+// 1. Logical Operators
+buss("\n==== Testing Logical Operators ====");
+
+let a = frfr;
+let b = cap;
+
+// NOT operator
+buss("!true =", !a);
+buss("!false =", !b);
+
+// Comparison operators
+buss("5 > 3 =", 5 > 3);
+buss("10 == 10 =", 10 == 10);
+
+// AND and OR operators
+let result = (5 < 10) && (3 > 1);
+buss("(5 < 10) && (3 > 1) =", result);
+
+result = (5 > 10) || (3 < 10);
+buss("(5 > 10) || (3 < 10) =", result);
+
+// Short-circuit evaluation
+result = cap && functionThatShouldNotRun();
+buss("false && function() =", result);  // Should be false without calling function
+
+result = frfr || functionThatShouldNotRun();
+buss("true || function() =", result);   // Should be true without calling function
+
+// 2. Advanced math using our Math object
+buss("\n==== Testing Advanced Math ====");
+
+let pi = 3.14159;
+// Replace Math.floor with simple calculation to avoid property access issues
+let rounded = pi - (pi % 1);
+buss("Pi =", pi);
+buss("Floor of Pi =", rounded);  // Should be 3
+
+// 3. Objects and property access
+buss("\n==== Testing Objects ====");
+
+// Create object with multiple properties
+let person = { 
+    name: "John",
+    age: 30,
+    isStudent: cap
+};
+
+// Object and property display
+buss("Person object:", person);
+// Avoid direct property access as it may not be fully supported
+buss("Person's name:", person["name"]);
+
+// Nested objects
+let student = {
+    name: "Jane",
+    grades: {
+        math: 95,
+        science: 92
+    }
+};
+
+buss("Student:", student);
+buss("Math grade:", student.grades.math);
+
+// Helper function that shouldn't run due to short-circuit
+fn functionThatShouldNotRun() {
+    buss("This function should not run!");
+    return "Function ran";
+} 

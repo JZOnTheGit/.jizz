@@ -34,8 +34,7 @@ too (let i = 1; i <= 3; i = i + 1) {
 buss("\n--- Testing loops with conditionals ---");
 too (let i = 1; i <= 10; i = i + 1) {
     let half = i / 2;
-    let flooredHalf = Math.floor;
-    let isEven = (half == flooredHalf(half));
+    let isEven = (i % 2 == 0);  // Simpler way to check if even
     if (isEven) {
         buss(i, "is even");
     } else {

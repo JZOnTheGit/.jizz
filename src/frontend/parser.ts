@@ -1,4 +1,4 @@
-import { Stmt, Program, Expr, BinaryExpr, NumericLiteral, Identifier, VarDeclaration, AssignmentExpr, ObjectLiteral, Property, CallExpr, MemberExpr, FunctionDeclaration, StringLiteral, IfStatement, ReturnStatement } from "./ast";
+import { Stmt, Program, Expr, BinaryExpr, NumericLiteral, Identifier, VarDeclaration, AssignmentExpr, ObjectLiteral, Property, CallExpr, MemberExpr, FunctionDeclaration, StringLiteral, IfStatement, ReturnStatement, LogicalExpr, ArrayLiteral, UnaryExpr } from "./ast";
 import { Token, TokenType, tokensize} from "./lexer";
 
 export default class Parser {
@@ -173,25 +173,28 @@ export default class Parser {
         return declaration;
     }
 
+    // Expression parsing chain:
+    // Assignment -> Logical -> Object -> Comparison -> Additive -> Multiplicative -> Call/Member -> Primary
+    
     private parse_expr(): Expr {
         return this.parse_assignment_expr();
     }
 
     private parse_assignment_expr(): Expr {
-        const left = this.parse_object_expr();
+        const left = this.parse_object_expr(); // Changed to object_expr
 
         if (this.at().type == TokenType.Equals) {
             this.eat();
             const value = this.parse_assignment_expr();
-            return { value, assigne: left, kind: "AssignmentExpr" } as AssignmentExpr;
+            return { kind: "AssignmentExpr", assigne: left, value } as AssignmentExpr;
         }
 
         return left;
     }
-
+    
     private parse_object_expr(): Expr {
         if (this.at().type !== TokenType.OpenBrace) {
-            return this.parse_comparison_expr();
+            return this.parse_logical_expr();
         }
 
         this.eat();
@@ -228,19 +231,46 @@ export default class Parser {
         this.expect(TokenType.CloseBrace, "Expected closing brace (]) after object literal");
         return {kind: "ObjectLiteral", properties} as ObjectLiteral;
     }
+    
+    private parse_logical_expr(): Expr {
+        let left = this.parse_comparison_expr();
+        
+        while (this.at().type === TokenType.LogicalOperator) {
+            const operator = this.eat().value;
+            const right = this.parse_comparison_expr();
+            left = {
+                kind: "LogicalExpr",
+                left,
+                right,
+                operator
+            } as LogicalExpr;
+        }
+        
+        return left;
+    }
 
+    // Comparison expressions (a > b, a == b)
     private parse_comparison_expr(): Expr {
         let left = this.parse_additive_expr();
 
-        while (this.at().type == TokenType.ComparisonOperator) {
+        while (
+            this.at().type == TokenType.ComparisonOperator ||
+            (this.at().type == TokenType.LogicalOperator && (this.at().value == "&&" || this.at().value == "||"))
+        ) {
             const operator = this.eat().value;
             const right = this.parse_additive_expr();
             left = {
                 kind: "BinaryExpr",
                 left,
                 right,
-                operator,
+                operator
             } as BinaryExpr;
+        }
+
+        if (this.at().type === TokenType.Colon && this.at().value === '?') {
+            this.eat(); // consume '?'
+            const trueExpr = this.parse_comparison_expr();
+            return trueExpr;
         }
 
         return left;
@@ -281,7 +311,7 @@ export default class Parser {
     }
 
     private parse_call_member_expr(): Expr {
-        let member = this.parse_member_expr();
+        let member = this.parse_primary_expr();
 
         while (this.at().type == TokenType.OpenParen) {
             member = this.parse_call_expr(member);
@@ -374,6 +404,22 @@ export default class Parser {
     private parse_primary_expr (): Expr {
         const tk = this.at().type;
 
+        // Handle the ! (NOT) operator
+        if (tk == TokenType.LogicalOperator && this.at().value == "!") {
+            this.eat(); // consume !
+            const expr = this.parse_primary_expr();
+            return {
+                kind: "UnaryExpr",
+                operator: "!",
+                operand: expr
+            } as UnaryExpr;
+        }
+
+        // Array literals
+        if (tk == TokenType.OpenBracket) {
+            return this.parse_array_expr();
+        }
+
         switch (tk){
             case TokenType.Identifier:
                 return { kind: "Identifier", symbol: this.eat().value } as Identifier;
@@ -394,6 +440,29 @@ export default class Parser {
             default:
                 throw `Error at line ${this.at().line}: Unexpected token ${TokenType[this.at().type]}`;
         }
+    }
+
+    private parse_array_expr(): Expr {
+        if (this.at().type !== TokenType.OpenBracket) {
+            return this.parse_primary_expr();
+        }
+
+        this.eat(); // consume [
+        const elements: Expr[] = [];
+
+        while (this.not_eof() && this.at().type !== TokenType.CloseBracket) {
+            // Parse expression for array element
+            const element = this.parse_expr();
+            elements.push(element);
+
+            // Expect comma between elements
+            if (this.at().type !== TokenType.CloseBracket) {
+                this.expect(TokenType.Comma, "Expected comma after array element");
+            }
+        }
+
+        this.expect(TokenType.CloseBracket, "Expected closing bracket after array elements");
+        return { kind: "ArrayLiteral", elements } as ArrayLiteral;
     }
 
     private parse_if_statement(): Stmt {

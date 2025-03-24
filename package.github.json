@@ -1,6 +1,6 @@
 {
   "name": "@jzonthegit/jizz",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "JIZZ Programming Language - A modern, expressive programming language with clean syntax frfr",
   "main": "dist/src/cli.js",
   "type": "commonjs",

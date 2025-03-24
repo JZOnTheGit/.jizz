@@ -1,17 +1,12 @@
-import { RuntimeValue, NumberValue, MK_NULL, MK_STRING, StringValue} from "./values";
-import { NodeType, Stmt, Program, Expr, BinaryExpr, NumericLiteral, StringLiteral, Identifier, VarDeclaration, AssignmentExpr, ObjectLiteral, CallExpr, MemberExpr, FunctionDeclaration, IfStatement, WhileStatement, ForStatement, ReturnStatement} from "../frontend/ast";
+import { RuntimeValue, NumberValue, MK_NULL, MK_STRING, StringValue, MK_BOOL} from "./values";
+import { NodeType, Stmt, Program, Expr, BinaryExpr, NumericLiteral, StringLiteral, Identifier, VarDeclaration, AssignmentExpr, ObjectLiteral, CallExpr, MemberExpr, FunctionDeclaration, IfStatement, WhileStatement, ForStatement, ReturnStatement, LogicalExpr, TernaryExpr, ArrayLiteral, UnaryExpr} from "../frontend/ast";
 import Environment from "./environment";
 import { eval_var_declaration, eval_program, eval_function_declaration, eval_if_statement, eval_while_statement, eval_for_statement } from "./eval/statements";
-import { eval_assignment, eval_binary_expr, eval_identifier, eval_object_expr, eval_call_expr, eval_member_expr } from "./eval/expressions";
-
-
-
-
+import { eval_assignment, eval_binary_expr, eval_identifier, eval_object_expr, eval_call_expr, eval_member_expr, eval_logical_expr, eval_ternary_expr, eval_array_literal, eval_unary_expr } from "./eval/expressions";
 
 export function evaluate(astNode: Stmt, env: Environment): RuntimeValue{
 
     switch(astNode.kind){
-
         case "NumericLiteral":
             return {
                 value: ((astNode as NumericLiteral).value), 
@@ -30,6 +25,9 @@ export function evaluate(astNode: Stmt, env: Environment): RuntimeValue{
         case "ObjectLiteral":
             return eval_object_expr(astNode as ObjectLiteral, env);
 
+        case "ArrayLiteral":
+            return eval_array_literal(astNode as ArrayLiteral, env);
+
         case "CallExpr":
             return eval_call_expr(astNode as CallExpr, env);
 
@@ -38,6 +36,15 @@ export function evaluate(astNode: Stmt, env: Environment): RuntimeValue{
 
         case "BinaryExpr":
             return eval_binary_expr(astNode as BinaryExpr, env);
+
+        case "LogicalExpr":
+            return eval_logical_expr(astNode as LogicalExpr, env);
+
+        case "TernaryExpr":
+            return eval_ternary_expr(astNode as TernaryExpr, env);
+
+        case "UnaryExpr":
+            return eval_unary_expr(astNode as UnaryExpr, env);
 
         case "AssignmentExpr":
             return eval_assignment(astNode as AssignmentExpr, env);

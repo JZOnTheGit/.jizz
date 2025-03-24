@@ -1,0 +1,17 @@
+// Testing logical operations
+
+// Test NOT operator
+let x = frfr;
+let y = cap;
+buss("!true =", !x);
+buss("!false =", !y);
+
+// Test AND operator (using binary comparisons)
+let a = 5;
+let b = 10;
+let resultAnd = (a < b) && (a > 0);
+buss("(5 < 10) && (5 > 0) =", resultAnd);
+
+// Test OR operator
+let resultOr = (a > b) || (a > 0);
+buss("(5 > 10) || (5 > 0) =", resultOr); 
