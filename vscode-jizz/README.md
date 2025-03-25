@@ -1,10 +1,11 @@
 # JIZZ Brainrot Syntax Highlighter
 
-This extension provides syntax highlighting for the JIZZ programming language in Visual Studio Code.
+This extension provides syntax highlighting and custom file icons for the JIZZ programming language in Visual Studio Code.
 
 ## Features
 
 - Syntax highlighting for JIZZ code files (.jizz)
+- Custom file icons for .jizz files in the file explorer
 - Support for JIZZ-specific keywords like `frfr`, `cap`, `typeshii`, `skibidi`, `too`, and `buss`
 - Proper highlighting for strings, numbers, and comments
 - Bracket matching for easier code navigation
@@ -28,11 +29,12 @@ If you've installed the JIZZ language package globally:
 jizz vscode
 ```
 
-### Option 3: Manual Installation
-1. Download the `.vsix` file from our [GitHub releases](https://github.com/JZOnTheGit/.jizz/releases)
-2. In VS Code, press Ctrl+Shift+X (or Cmd+Shift+X on macOS)
-3. Click "..." in the top-right and select "Install from VSIX..."
-4. Navigate to the downloaded file
+## Using File Icons
+
+After installation, your .jizz files will have a custom icon in the file explorer. To enable the custom icon theme:
+
+1. Go to File → Preferences → File Icon Theme (or Code → Preferences → File Icon Theme on macOS)
+2. Select "JIZZ Icons" from the list
 
 ## About JIZZ Language
 

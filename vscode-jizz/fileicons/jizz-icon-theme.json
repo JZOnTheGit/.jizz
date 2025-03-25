@@ -1,0 +1,14 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/vscode-extension-samples/main/theme-sample/fileicons/schema.json",
+  "iconDefinitions": {
+    "_jizz_file": {
+      "iconPath": "./jizz.png"
+    }
+  },
+  "fileExtensions": {
+    "jizz": "_jizz_file"
+  },
+  "languageIds": {
+    "jizz": "_jizz_file"
+  }
+} 

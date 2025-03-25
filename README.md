@@ -70,16 +70,15 @@ If you've installed JIZZ globally:
 jizz vscode
 ```
 
-### Option 3: Manual Installation
-1. Download the `.vsix` file from our [GitHub releases](https://github.com/JZOnTheGit/.jizz/releases)
-2. In VS Code, press Ctrl+Shift+X (or Cmd+Shift+X on macOS)
-3. Click "..." in the top-right and select "Install from VSIX..."
-4. Navigate to the downloaded file
-
 The extension provides:
 - Syntax highlighting for all JIZZ keywords (`frfr`, `cap`, `typeshii`, etc.)
+- Custom file icons for .jizz files in the file explorer
 - Proper color-coding for strings, numbers, and comments
 - Bracket matching and code folding
+
+To enable the custom file icons:
+1. Go to File → Preferences → File Icon Theme (or Code → Preferences → File Icon Theme on macOS)
+2. Select "JIZZ Icons" from the list
 
 ![JIZZ Syntax Highlighting](https://raw.githubusercontent.com/JZOnTheGit/.jizz/main/assets/vscode-syntax.png)
 
@@ -152,51 +151,6 @@ Or test a specific JIZZ file:
 npm run build && node dist/src/cli.js run your-test-file.jizz
 ```
 
-### VSCode Extension Development
-
-To work on the VSCode extension:
-
-1. Make changes to files in the `vscode-jizz` directory
-2. Package the extension with `npm run package-vscode`
-3. Install the extension with `npm run vscode-install`
-
-## Publishing the VSCode Extension
-
-To publish the JIZZ VSCode extension to the Visual Studio Marketplace:
-
-### Prerequisites
-
-1. [Create a publisher account](https://marketplace.visualstudio.com/manage) on the VS Code Marketplace
-2. Get your publisher ID from your account details:
-   - Sign in to the [Visual Studio Marketplace Management portal](https://marketplace.visualstudio.com/manage)
-   - Create a new publisher if you don't have one (click "New Publisher")
-   - Your Publisher ID will be shown in your publisher dashboard
-   - This is the ID you'll use in the next step
-3. Make sure you have a Personal Access Token (PAT) with Marketplace publishing permissions
-
-### Publishing Steps
-
-1. Update the `publisher` field in `vscode-jizz/package.json` with your publisher ID
-2. Run the publish script:
-
-```bash
-npm run publish-vscode
-```
-
-This script will:
-- Package the extension (creating a .vsix file)
-- Publish it to the marketplace using your token
-- Handle any errors and provide troubleshooting information
-
-### Troubleshooting Publication
-
-If you encounter issues during publishing:
-
-1. Ensure your publisher ID matches exactly what's registered on the marketplace
-2. Check that your token has the correct permissions
-3. Make sure your extension name is unique in the marketplace
-
-For more details, see the [VSCode_EXTENSION.md](VSCODE_EXTENSION.md) file.
 
 ## Language Features
 
