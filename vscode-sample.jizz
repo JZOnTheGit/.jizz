@@ -1,0 +1,58 @@
+// JIZZ Language Sample with Syntax Highlighting
+// Demonstrates various language features and keywords
+
+// Variables and constants
+let counter = 0;
+const PI = 3.14159;
+
+// Boolean values using frfr and cap
+let isActive = frfr;
+let isDisabled = cap;
+
+// User input and type conversion
+let name = ask("What's your name? ");
+let age = int(ask("How old are you? "));
+
+// Function declaration with typeshii
+typeshii greet(person, isNice) {
+    if (isNice == frfr) {
+        return "Hello, " + person + "!";
+    } else {
+        return "Go away, " + person + "!";
+    }
+}
+
+// Skibidi loop (while)
+skibidi (counter < 5) {
+    buss("Counter:", counter);
+    counter = counter + 1;
+}
+
+// Too loop (for)
+buss("\nCounting from 0 to 4:");
+too (let i = 0; i < 5; i = i + 1) {
+    buss("  ", i);
+}
+
+// Logical operators
+let hasTicket = frfr;
+let hasVIP = cap;
+let canEnter = hasTicket || hasVIP;
+
+if (age >= 18 && canEnter) {
+    buss("Welcome to the show, " + name + "!");
+} else {
+    buss("Sorry, you can't enter.");
+}
+
+// Object with properties
+let person = {
+    name: "John",
+    age: 30,
+    isStudent: cap,
+    city: "New York"
+};
+
+// Call the function with arguments
+let greeting = greet(person.name, frfr);
+buss(greeting);

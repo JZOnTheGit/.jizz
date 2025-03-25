@@ -1,0 +1,38 @@
+{
+  "name": "jizz-language",
+  "displayName": "JIZZ Brainrot Syntax Highlighter",
+  "description": "Syntax highlighting for JIZZ Programming Language with unique brainrot syntax",
+  "version": "1.0.1",
+  "publisher": "JasstejSingh",
+  "icon": "jizz-icon.png",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": ["Programming Languages"],
+  "contributes": {
+    "languages": [{
+      "id": "jizz",
+      "aliases": ["JIZZ", "jizz"],
+      "extensions": [".jizz"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "jizz",
+      "scopeName": "source.jizz",
+      "path": "./syntaxes/jizz.tmLanguage.json"
+    }]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JZOnTheGit/.jizz"
+  },
+  "keywords": [
+    "jizz",
+    "programming language",
+    "syntax",
+    "brainrot",
+    "skibidi",
+    "frfr",
+    "cap"
+  ]
+} 

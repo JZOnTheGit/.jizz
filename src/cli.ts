@@ -205,4 +205,31 @@ buss(result);
 `));
   });
 
+// Add VSCode extension installer command
+program
+  .command('vscode')
+  .description('Install VSCode syntax highlighting for JIZZ')
+  .action(() => {
+    console.log(chalk.cyan('\nInstalling VSCode syntax highlighting for JIZZ...\n'));
+    
+    try {
+      const scriptPath = join(__dirname, '..', 'scripts', 'install-vscode-extension.js');
+      
+      if (existsSync(scriptPath)) {
+        // Execute the install script
+        execSync(`node "${scriptPath}"`, { stdio: 'inherit' });
+      } else {
+        console.error(chalk.red('Error: VSCode extension installer script not found.'));
+        console.log(chalk.yellow('\nYou can install the extension manually:'));
+        console.log(chalk.white('1. Open VSCode'));
+        console.log(chalk.white('2. Press Ctrl+P (or Cmd+P on macOS)'));
+        console.log(chalk.white('3. Type: ext install jizz-language'));
+        console.log(chalk.white('4. Press Enter'));
+      }
+    } catch (error) {
+      console.error(chalk.red('Error installing VSCode extension:'), error);
+      process.exit(1);
+    }
+  });
+
 program.parse();

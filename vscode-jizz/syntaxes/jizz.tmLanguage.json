@@ -1,0 +1,58 @@
+{
+  "name": "JIZZ",
+  "scopeName": "source.jizz",
+  "fileTypes": ["jizz"],
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#keywords" },
+    { "include": "#strings" },
+    { "include": "#numbers" },
+    { "include": "#functions" },
+    { "include": "#operators" }
+  ],
+  "repository": {
+    "keywords": {
+      "patterns": [{
+        "name": "keyword.control.jizz",
+        "match": "\\b(if|else|typeshii|skibidi|too|return|let|const)\\b"
+      }, {
+        "name": "constant.language.boolean.jizz",
+        "match": "\\b(frfr|cap)\\b"
+      }, {
+        "name": "support.function.jizz",
+        "match": "\\b(buss|ask|int|str)\\b"
+      }]
+    },
+    "strings": {
+      "name": "string.quoted.double.jizz",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        { "name": "constant.character.escape.jizz", "match": "\\\\." }
+      ]
+    },
+    "comments": {
+      "patterns": [{
+        "name": "comment.line.double-slash.jizz",
+        "match": "//.*$"
+      }]
+    },
+    "numbers": {
+      "name": "constant.numeric.jizz",
+      "match": "\\b[0-9]+(\\.[0-9]+)?\\b"
+    },
+    "functions": {
+      "patterns": [{
+        "match": "\\b(typeshii)\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s*\\(",
+        "captures": {
+          "1": { "name": "storage.type.function.jizz" },
+          "2": { "name": "entity.name.function.jizz" }
+        }
+      }]
+    },
+    "operators": {
+      "name": "keyword.operator.jizz",
+      "match": "(\\+|\\-|\\*|\\/|==|!=|<|>|<=|>=|&&|\\|\\||!|=)"
+    }
+  }
+} 
