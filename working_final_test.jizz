@@ -39,7 +39,7 @@ buss("Colors array:", colors);
 buss("\n==== Testing Short-Circuit Evaluation ====");
 
 // Helper function that shouldn't run due to short-circuit
-fn functionThatShouldNotRun() {
+typeshii functionThatShouldNotRun() {
     buss("This function should not run!");
     return "Function ran";
 }

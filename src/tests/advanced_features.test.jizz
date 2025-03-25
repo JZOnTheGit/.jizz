@@ -1,44 +1,55 @@
-// Advanced JIZZ Features Test - Simplified Version
+// Advanced JIZZ Features Test - Enhanced For Production
 
-// 1. Logical Operators
-buss("\n==== Testing Logical Operators ====");
+// Start marker to clearly show the test is running
+buss("\n=========================================");
+buss("   STARTING ADVANCED FEATURES TEST");
+buss("=========================================\n");
+
+// 1. Logical Operators Section
+buss("✅ TESTING LOGICAL OPERATORS:");
+buss("------------------------------");
 
 let a = frfr;
 let b = cap;
 
 // NOT operator
-buss("!true =", !a);
-buss("!false =", !b);
+buss("  !true =", !a);
+buss("  !false =", !b);
 
 // Comparison operators
-buss("5 > 3 =", 5 > 3);
-buss("10 == 10 =", 10 == 10);
+buss("\n  Comparison operators:");
+buss("  5 > 3 =", 5 > 3);
+buss("  10 == 10 =", 10 == 10);
 
 // AND and OR operators
+buss("\n  Logical AND/OR operators:");
 let result = (5 < 10) && (3 > 1);
-buss("(5 < 10) && (3 > 1) =", result);
+buss("  (5 < 10) && (3 > 1) =", result);
 
 result = (5 > 10) || (3 < 10);
-buss("(5 > 10) || (3 < 10) =", result);
+buss("  (5 > 10) || (3 < 10) =", result);
 
 // Short-circuit evaluation
+buss("\n  Short-circuit evaluation:");
 result = cap && functionShouldNotRun();
-buss("false && function() =", result);  // Should be false without calling function
+buss("  false && function() =", result);  // Should be false without calling function
 
 result = frfr || functionShouldNotRun();
-buss("true || function() =", result);   // Should be true without calling function
+buss("  true || function() =", result);   // Should be true without calling function
 
 // 2. Advanced math operations
-buss("\n==== Testing Math Operations ====");
+buss("\n✅ TESTING MATH OPERATIONS:");
+buss("------------------------------");
 
 let pi = 3.14159;
 // Simple floor calculation without using Math.floor
 let rounded = pi - (pi % 1);
-buss("Pi =", pi);
-buss("Floor of Pi =", rounded);  // Should be 3
+buss("  Pi =", pi);
+buss("  Floor of Pi =", rounded);  // Should be 3
 
 // 3. Objects
-buss("\n==== Testing Objects ====");
+buss("\n✅ TESTING OBJECTS:");
+buss("------------------------------");
 
 // Create object with multiple properties
 let person = { 
@@ -48,10 +59,15 @@ let person = {
 };
 
 // Object display
-buss("Person object:", person);
+buss("  Person object:", person);
+
+// End marker
+buss("\n=========================================");
+buss("   ADVANCED FEATURES TEST COMPLETED");
+buss("=========================================");
 
 // Helper function that shouldn't run due to short-circuit
-fn functionShouldNotRun() {
+typeshii functionShouldNotRun() {
     buss("This function should not run!");
     return "Function ran";
 } 

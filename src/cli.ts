@@ -194,7 +194,7 @@ too (let i = 0; i < 5; i = i + 1) {
 }
 
 // Functions
-fn greet(name) {
+typeshii greet(name) {
     buss("Hello, " + name + "!");
     return "Greeting sent to " + name;
 }
@@ -205,4 +205,4 @@ buss(result);
 `));
   });
 
-program.parse(); 
+program.parse();

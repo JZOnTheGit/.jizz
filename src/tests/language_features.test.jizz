@@ -33,13 +33,13 @@ let person = {
 buss(person);
 
 // Test functions
-fn add(a, b) {
-    let result = a + b;
-    buss("Sum is:", result);
-    return result;
+typeshii add(a, b) {
+    let sum = a + b;
+    buss("Sum is:", sum);
+    return sum;
 }
 
-add(5, 3);  // Should print: Sum is: 8
+add(5, 3);  // Should output 8
 
 // Test nested if statements
 let age = 25;

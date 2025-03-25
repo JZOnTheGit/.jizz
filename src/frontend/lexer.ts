@@ -44,7 +44,7 @@ export enum TokenType {
 const KEYWORDS: Record<string, TokenType> = {
     let: TokenType.Let,
     const: TokenType.Const,
-    fn: TokenType.Fn,
+    typeshii: TokenType.Fn,  // changed from "fn" to "typeshii" for function declarations
     if: TokenType.If,
     else: TokenType.Else,
     skibidi: TokenType.Skibidi,  // only skibidi for while loops

@@ -111,7 +111,7 @@ buss(person);  // Output: { name: "John", age: 30, isStudent: false, city: "New 
 ### Functions
 
 ```javascript
-fn add(a, b) {
+typeshii add(a, b) {
     let result = a + b;
     buss("Sum is:", result);
     return result;
@@ -201,12 +201,8 @@ buss("Short-circuit OR:", result);  // true
 ```
 
 // Define the function referenced above
-fn functionShouldNotRun() {
+typeshii functionShouldNotRun() {
     buss("This function should not run!");
     return "Function ran";
 }
-```
-
-### Loops (BrainRot Edition)
-
 ```

@@ -1,0 +1,72 @@
+// PRODUCTION TEST FILE
+// This file should produce obvious output in any environment
+
+// Highly visible start marker
+buss("");
+buss("*******************************************");
+buss("*                                         *");
+buss("*       JIZZ LANGUAGE PRODUCTION TEST     *");
+buss("*                                         *");
+buss("*******************************************");
+buss("");
+
+// Test basic output
+buss("1. Basic Output Test:");
+buss("   HELLO WORLD - If you see this, basic output works!");
+buss("");
+
+// Test variable assignment
+buss("2. Variable Assignment Test:");
+let testVar = 42;
+buss("   Variable value:", testVar);
+buss("");
+
+// Test boolean operations
+buss("3. Boolean Operations Test:");
+let testBool = frfr;
+buss("   Boolean value (frfr):", testBool);
+buss("   Inverted (!frfr):", !testBool);
+buss("");
+
+// Test logical operators
+buss("4. Logical Operators Test:");
+buss("   AND: true && true =", frfr && frfr);
+buss("   OR: false || true =", cap || frfr);
+buss("");
+
+// Test simple loops
+buss("5. Loop Test (skibidi loop):");
+let count = 1;
+skibidi (count <= 3) {
+    buss("   Loop iteration:", count);
+    count = count + 1;
+}
+buss("");
+
+// Test user defined function
+buss("6. Function Test:");
+typeshii testFunction(msg) {
+    buss("   Function received:", msg);
+    return "Function works!";
+}
+let functionResult = testFunction("Test Message");
+buss("   Function returned:", functionResult);
+buss("");
+
+// Test object creation
+buss("7. Object Test:");
+let testObject = {
+    name: "Test Object",
+    value: 99,
+    active: frfr
+};
+buss("   Created object:", testObject);
+buss("");
+
+// End marker
+buss("*******************************************");
+buss("*                                         *");
+buss("*      PRODUCTION TEST COMPLETED          *");
+buss("*                                         *");
+buss("*******************************************");
+buss(""); 
