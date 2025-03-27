@@ -1,0 +1,11 @@
+// Object test
+
+// Create a simple object
+let myMath = {
+    pi: 3.14,
+    e: 2.71
+};
+
+// Access the properties
+buss("My PI is:", myMath.pi);
+buss("My E is:", myMath.e); 

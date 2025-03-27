@@ -11,6 +11,7 @@ export enum TokenType {
     BinaryOperator, //+ - * / %
     ComparisonOperator, // < > <= >= == !=
     LogicalOperator, // && || !
+    QuestionMark, // ?
     
     // Grouping Tokens
     OpenParen, //(
@@ -160,6 +161,9 @@ export function tokensize(sourceCode: string): Token[] {
                 i++;
             } else if (line[i] === '.') {
                 tokens.push({ type: TokenType.Dot, value: line[i], line: currentLine });
+                i++;
+            } else if (line[i] === '?') {
+                tokens.push({ type: TokenType.QuestionMark, value: line[i], line: currentLine });
                 i++;
             } else if (line[i] === '=') {
                 if (i + 1 < line.length && line[i + 1] === '=') {

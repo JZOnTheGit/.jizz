@@ -1,0 +1,124 @@
+// JIZZ New Features Showcase
+// This example demonstrates JizzMath, ternary operator, and negative numbers
+
+buss("=== JIZZ NEW FEATURES SHOWCASE ===");
+buss("--------------------------------");
+
+// --------------------------
+// Negative Numbers Support
+// --------------------------
+buss("\n1. NEGATIVE NUMBERS SUPPORT:");
+buss("---------------------------");
+
+// Basic negative numbers
+let negVal = -42;
+buss("Basic negative number:", negVal);
+
+// Arithmetic with negative numbers
+buss("Math with negative numbers:");
+buss("  5 + (-3) =", 5 + -3);
+buss("  -7 * 2 =", -7 * 2);
+buss("  15 / -3 =", 15 / -3);
+
+// Negative number in variables
+let temperature = -5;
+buss("Current temperature:", temperature, "degrees");
+
+// Double negation
+let doubleNeg = -(-10);
+buss("Double negation -(-10) =", doubleNeg);
+
+// --------------------------
+// Ternary Operator
+// --------------------------
+buss("\n2. TERNARY OPERATOR:");
+buss("------------------");
+
+// Basic ternary
+let isHot = temperature > 25;
+let clothing = isHot ? "t-shirt" : "sweater";
+buss("Weather advice: Wear a", clothing);
+
+// Ternary with function calls
+typeshii getDiscount(isPremium) {
+    return isPremium ? 20 : 5;
+}
+
+let userIsPremium = frfr;
+buss("User discount:", getDiscount(userIsPremium) + "%");
+
+// Nested ternary for multiple conditions
+let age = 25;
+let ageGroup = age < 13 ? "child" : age < 20 ? "teenager" : age < 65 ? "adult" : "senior";
+buss("Age group:", ageGroup);
+
+// Absulute value function using ternary
+typeshii abs(n) {
+    return n < 0 ? -n : n;
+}
+buss("Absolute values:");
+buss("  abs(42) =", abs(42));
+buss("  abs(-42) =", abs(-42));
+buss("  abs(0) =", abs(0));
+
+// --------------------------
+// JizzMath Module
+// --------------------------
+buss("\n3. JIZZMATH MODULE:");
+buss("------------------");
+
+// Constants
+buss("Mathematical constants:");
+buss("  JizzMath.PI =", JizzMath.PI);
+buss("  JizzMath.E =", JizzMath.E);
+
+// Basic math functions
+buss("\nRounding functions:");
+let decimalVal = 4.7;
+buss("  Original value:", decimalVal);
+buss("  JizzMath.floor(4.7) =", JizzMath.floor(decimalVal));
+buss("  JizzMath.ceil(4.7) =", JizzMath.ceil(decimalVal));
+buss("  JizzMath.round(4.7) =", JizzMath.round(decimalVal));
+
+// Square root and powers
+buss("\nSquare root and powers:");
+buss("  JizzMath.sqrt(16) =", JizzMath.sqrt(16));
+buss("  JizzMath.pow(2, 8) =", JizzMath.pow(2, 8));
+
+// Min and max
+buss("\nMin and max functions:");
+buss("  JizzMath.min(5, 2, 8, 1) =", JizzMath.min(5, 2, 8, 1));
+buss("  JizzMath.max(5, 2, 8, 1) =", JizzMath.max(5, 2, 8, 1));
+
+// Absolute value
+buss("\nAbsolute value:");
+buss("  JizzMath.abs(-10) =", JizzMath.abs(-10));
+buss("  JizzMath.abs(10) =", JizzMath.abs(10));
+
+// --------------------------
+// Practical Example: Hypotenuse Calculator
+// --------------------------
+buss("\n4. PRACTICAL EXAMPLE: HYPOTENUSE CALCULATOR");
+buss("------------------------------------------");
+
+typeshii calculateHypotenuse(a, b) {
+    // Uses both negative numbers support and JizzMath
+    // The ternary ensures positive values are used
+    let sideA = a < 0 ? -a : a;
+    let sideB = b < 0 ? -b : b;
+    
+    return JizzMath.sqrt(JizzMath.pow(sideA, 2) + JizzMath.pow(sideB, 2));
+}
+
+let side1 = 3;
+let side2 = 4;
+buss("Triangle with sides", side1, "and", side2);
+buss("Hypotenuse =", calculateHypotenuse(side1, side2));
+
+// Also works with negative inputs
+let negativeSide1 = -5;
+let negativeSide2 = -12;
+buss("Triangle with sides", negativeSide1, "and", negativeSide2);
+buss("Hypotenuse =", calculateHypotenuse(negativeSide1, negativeSide2));
+
+buss("\n=== END OF SHOWCASE ==="); 

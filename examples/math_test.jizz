@@ -1,0 +1,83 @@
+// Math Library Test
+// Testing the enhanced Math library in JIZZ
+
+// Constants
+buss("=== Math Constants ===");
+buss("Math.PI: " + Math.PI);
+buss("Math.E: " + Math.E);
+
+// Basic rounding functions
+buss("\n=== Basic Rounding Functions ===");
+let value = 5.7;
+buss("Original value: " + value);
+buss("Math.floor(5.7): " + Math.floor(value));
+buss("Math.ceil(5.7): " + Math.ceil(value));
+buss("Math.round(5.7): " + Math.round(value));
+
+value = 5.2;
+buss("\nOriginal value: " + value);
+buss("Math.floor(5.2): " + Math.floor(value));
+buss("Math.ceil(5.2): " + Math.ceil(value));
+buss("Math.round(5.2): " + Math.round(value));
+
+value = 5.5;
+buss("\nOriginal value: " + value);
+buss("Math.floor(5.5): " + Math.floor(value));
+buss("Math.ceil(5.5): " + Math.ceil(value));
+buss("Math.round(5.5): " + Math.round(value));
+
+// Absolute value
+buss("\n=== Absolute Value ===");
+buss("Math.abs(10): " + Math.abs(10));
+buss("Math.abs(-10): " + Math.abs(-10));
+buss("Math.abs(0): " + Math.abs(0));
+
+// Square root
+buss("\n=== Square Root ===");
+buss("Math.sqrt(16): " + Math.sqrt(16));
+buss("Math.sqrt(2): " + Math.sqrt(2));
+buss("Math.sqrt(0): " + Math.sqrt(0));
+
+// Power
+buss("\n=== Power Function ===");
+buss("Math.pow(2, 3): " + Math.pow(2, 3));
+buss("Math.pow(4, 0.5): " + Math.pow(4, 0.5));
+buss("Math.pow(9, 0.5): " + Math.pow(9, 0.5));
+buss("Math.pow(5, 2): " + Math.pow(5, 2));
+
+// Min and Max
+buss("\n=== Min and Max Functions ===");
+buss("Math.min(3, 7, 2, 9): " + Math.min(3, 7, 2, 9));
+buss("Math.max(3, 7, 2, 9): " + Math.max(3, 7, 2, 9));
+buss("Math.min(-10, 0, 10): " + Math.min(-10, 0, 10));
+buss("Math.max(-10, 0, 10): " + Math.max(-10, 0, 10));
+
+// Random
+buss("\n=== Random Function ===");
+let rand1 = Math.random();
+buss("Math.random(): " + rand1);
+let rand2 = Math.random();
+buss("Math.random(): " + rand2);
+let rand3 = Math.random();
+buss("Math.random(): " + rand3);
+
+// Example: Random integer in range
+typeshii randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+buss("\nRandom integers in range (1-10):");
+buss("Random integer: " + randomInt(1, 10));
+buss("Random integer: " + randomInt(1, 10));
+buss("Random integer: " + randomInt(1, 10));
+
+// Practical example: Pythagorean theorem
+buss("\n=== Practical Example: Pythagorean Theorem ===");
+typeshii calculateHypotenuse(a, b) {
+    return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+}
+
+buss("Hypotenuse of triangle with sides 3 and 4: " + calculateHypotenuse(3, 4));
+buss("Hypotenuse of triangle with sides 5 and 12: " + calculateHypotenuse(5, 12));
+
+buss("\nAll Math library tests completed successfully!"); 

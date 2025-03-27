@@ -1,0 +1,7 @@
+// Function object test
+typeshii createPoint(x, y) {
+    return { x: x, y: y };
+}
+
+let point = createPoint(10, 20);
+buss("Point:", point); 

@@ -42,6 +42,8 @@ jizz repl
 # View examples
 jizz examples
 
+
+
 # Install VSCode syntax highlighting
 jizz vscode
 
@@ -101,6 +103,10 @@ To enable the custom file icons:
 - Logical operators (AND, OR, NOT) with short-circuit evaluation
 - Comparison operators for complex conditions
 - Array support with numeric indices
+- Game development with the Game module
+- **Ternary operator for concise conditional expressions**
+- **JizzMath module with mathematical functions and constants**
+- **Full support for negative numbers**
 
 ## Development
 
@@ -292,3 +298,82 @@ typeshii functionShouldNotRun() {
     return "Function ran";
 }
 ```
+
+### Ternary Operator
+
+JIZZ supports the conditional (ternary) operator for concise conditional expressions:
+
+```javascript
+// Basic ternary syntax
+let max = a > b ? a : b;
+
+// Nested ternary for multiple conditions
+let message = age < 18 ? "Minor" : age < 65 ? "Adult" : "Senior";
+
+// With function calls
+let greeting = hasPermission ? getVIPMessage() : getRegularMessage();
+
+// Custom absolute value function using ternary
+typeshii abs(n) {
+    return n < 0 ? -n : n;
+}
+```
+
+### Negative Numbers
+
+JIZZ fully supports negative numbers in all contexts:
+
+```javascript
+// Basic negative numbers
+let a = -10;
+buss("Negative value:", a);
+
+// Expressions with negative numbers
+let result = 5 + -3;  // 2
+let product = -4 * 3;  // -12
+
+// Nested negation
+let doubleNegative = -(-5);  // 5
+
+// Functions with negative numbers
+typeshii negate(num) {
+    return -num;
+}
+buss(negate(7));  // -7
+```
+
+### JizzMath Module
+
+JIZZ provides a comprehensive math library through the JizzMath module:
+
+```javascript
+// Constants
+buss(JizzMath.PI);  // 3.141592653589793
+buss(JizzMath.E);   // 2.718281828459045
+
+// Rounding functions
+buss(JizzMath.floor(5.7));  // 5
+buss(JizzMath.ceil(5.2));   // 6
+buss(JizzMath.round(5.5));  // 6
+
+// Absolute value
+buss(JizzMath.abs(-10));  // 10
+
+// Square root and powers
+buss(JizzMath.sqrt(16));    // 4
+buss(JizzMath.pow(2, 3));   // 8
+
+// Min and max functions
+buss(JizzMath.min(3, 7, 2, 9));  // 2
+buss(JizzMath.max(3, 7, 2, 9));  // 9
+
+// Random number generation
+buss(JizzMath.random());  // Random number between 0 and 1
+
+// Practical example: Pythagorean theorem
+typeshii calculateHypotenuse(a, b) {
+    return JizzMath.sqrt(JizzMath.pow(a, 2) + JizzMath.pow(b, 2));
+}
+buss(calculateHypotenuse(3, 4));  // 5
+```
+

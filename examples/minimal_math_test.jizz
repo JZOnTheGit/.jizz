@@ -1,0 +1,4 @@
+// Minimal Math test
+
+// Just print Math.PI
+buss("Math.PI value is", Math.PI); 

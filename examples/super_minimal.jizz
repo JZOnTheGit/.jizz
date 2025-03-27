@@ -1,0 +1,31 @@
+// Super minimal test file with explicit delays
+
+buss("Starting JIZZ test program");
+
+// Create a window and store the ID
+buss("Creating window...");
+let window = createWindow("Minimal Test", 300, 200);
+buss("Window created with ID:", window);
+
+// Define a drawing function to use in game loop
+typeshii drawStuff() {
+  // Clear the screen
+  buss("Clearing screen...");
+  clear("black");
+  
+  // Draw a blue rectangle
+  buss("Drawing rectangle...");
+  drawRect(100, 50, 50, 50, "blue");
+  
+  // Draw some text
+  buss("Drawing text...");
+  drawText("Test Window", 70, 30, "white", "16px Arial");
+  
+  buss("Drawing complete");
+}
+
+// Start a simple game loop to continuously update the screen
+buss("Starting game loop...");
+startGameLoop(drawStuff, 1); // Run at 1 FPS for debugging
+
+buss("Test program initialized successfully"); 

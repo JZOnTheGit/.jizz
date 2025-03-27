@@ -1,0 +1,8 @@
+// Simple Math Test
+
+// Testing Math.PI
+buss("Math.PI:", Math.PI);
+
+// Testing Math.floor
+let value = 5.7;
+buss("Math.floor:", Math.floor(value)); 

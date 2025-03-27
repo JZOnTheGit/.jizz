@@ -1,0 +1,58 @@
+
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>JIZZ Debug Console</title>
+        <style>
+          body {
+            background: #111;
+            color: #0f0;
+            font-family: monospace;
+            margin: 0;
+            padding: 20px;
+            overflow: hidden;
+          }
+          #console {
+            white-space: pre-wrap;
+            height: calc(100vh - 40px);
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 14px;
+          }
+        </style>
+      </head>
+      <body>
+        <div id="console">
+JIZZ Game Engine Debug Console
+-----------------------------
+Game file: /Users/jz/VS_Code_Stuff/ProgrammingLanguage(.jizz)/examples/enhanced_key_test.jizz
+Project root: /Users/jz/VS_Code_Stuff/ProgrammingLanguage(.jizz)
+        </div>
+        <script>
+          const consoleDiv = document.getElementById('console');
+          
+          // Hijack console.log to display in our div
+          const originalConsoleLog = console.log;
+          console.log = function() {
+            const args = Array.from(arguments);
+            const message = args.join(' ');
+            consoleDiv.textContent += "\n" + message;
+            consoleDiv.scrollTop = consoleDiv.scrollHeight;
+            originalConsoleLog.apply(console, arguments);
+          };
+          
+          // Same for console.error
+          const originalConsoleError = console.error;
+          console.error = function() {
+            const args = Array.from(arguments);
+            const message = args.join(' ');
+            consoleDiv.textContent += "\n[ERROR] " + message;
+            consoleDiv.scrollTop = consoleDiv.scrollHeight;
+            originalConsoleError.apply(console, arguments);
+          };
+          
+          console.log('Debug window initialized');
+        </script>
+      </body>
+    </html>
+  

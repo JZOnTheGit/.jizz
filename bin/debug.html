@@ -1,0 +1,48 @@
+
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>JIZZ Debug Console</title>
+          <style>
+            body { 
+              background: #111; 
+              color: #0f0; 
+              font-family: monospace; 
+              padding: 20px;
+              margin: 0;
+              overflow: hidden;
+            }
+            #console {
+              white-space: pre-wrap;
+              overflow-y: auto;
+              height: calc(100vh - 40px);
+              font-family: monospace;
+              font-size: 14px;
+            }
+          </style>
+        </head>
+        <body>
+          <div id="console">
+JIZZ Debug Console
+-----------------
+Electron initialized
+Game file: /Users/jz/VS_Code_Stuff/ProgrammingLanguage(.jizz)/examples/debug_game.jizz
+          </div>
+          <script>
+            const consoleDiv = document.getElementById('console');
+            
+            // Override console.log to display in our div
+            const originalConsoleLog = console.log;
+            console.log = function() {
+              const args = Array.from(arguments);
+              const message = args.join(' ');
+              consoleDiv.textContent += "\n" + message;
+              consoleDiv.scrollTop = consoleDiv.scrollHeight;
+              originalConsoleLog.apply(console, arguments);
+            };
+            
+            console.log('Debug window loaded');
+          </script>
+        </body>
+      </html>
+    

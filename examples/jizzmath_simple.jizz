@@ -1,0 +1,13 @@
+// JizzMath Simple Test
+
+// First check if JizzMath exists
+buss("JizzMath module test");
+
+// Store PI in a variable first
+let pi = JizzMath.PI;
+buss("PI value:", pi);
+
+// Store a function reference first
+let floor = JizzMath.floor;
+let result = floor(5.7);
+buss("Floor of 5.7:", result); 

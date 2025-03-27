@@ -1,0 +1,35 @@
+// Debug object literals
+
+buss("Testing object literals:");
+
+// Simple object
+let obj = { x: 1, y: 2 };
+buss("Simple object:", obj);
+
+// Function that creates an object
+typeshii createPoint(x, y) {
+    return { x: x, y: y };
+}
+
+let point = createPoint(10, 20);
+buss("Created point:", point);
+
+// Array of objects
+let points = [
+    { x: 1, y: 2 },
+    { x: 3, y: 4 },
+    { x: 5, y: 6 }
+];
+buss("Array of points:", points);
+
+// Accessing object properties
+buss("obj.x =", obj.x);
+buss("obj.y =", obj.y);
+
+// Modifying object properties
+obj.x = 100;
+obj.y = 200;
+buss("Modified object:", obj);
+
+// End test
+buss("Object literal test completed successfully!"); 

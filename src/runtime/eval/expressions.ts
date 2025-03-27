@@ -282,6 +282,15 @@ export function eval_unary_expr(expr: UnaryExpr, env: Environment): RuntimeValue
         case "!":
             // Logical NOT
             return MK_BOOL(!isTruthy(operand));
+        case "-":
+            // Unary minus
+            if (operand.type !== "number") {
+                throw `Cannot apply unary minus to non-number value: ${operand.type}`;
+            }
+            return { 
+                type: "number", 
+                value: -(operand as NumberValue).value 
+            } as NumberValue;
         default:
             throw `Unsupported unary operator: ${expr.operator}`;
     }

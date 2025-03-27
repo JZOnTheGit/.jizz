@@ -1,4 +1,4 @@
-import { Stmt, Program, Expr, BinaryExpr, NumericLiteral, Identifier, VarDeclaration, AssignmentExpr, ObjectLiteral, Property, CallExpr, MemberExpr, FunctionDeclaration, StringLiteral, IfStatement, ReturnStatement, LogicalExpr, ArrayLiteral, UnaryExpr } from "./ast";
+import { Stmt, Program, Expr, BinaryExpr, NumericLiteral, Identifier, VarDeclaration, AssignmentExpr, ObjectLiteral, Property, CallExpr, MemberExpr, FunctionDeclaration, StringLiteral, IfStatement, ReturnStatement, LogicalExpr, ArrayLiteral, UnaryExpr, TernaryExpr } from "./ast";
 import { Token, TokenType, tokensize} from "./lexer";
 
 export default class Parser {
@@ -246,6 +246,20 @@ export default class Parser {
             } as LogicalExpr;
         }
         
+        // Check if it's a ternary expression (condition ? trueExpr : falseExpr)
+        if (this.at().type === TokenType.QuestionMark) {
+            this.eat(); // consume '?'
+            const trueExpr = this.parse_expr();
+            this.expect(TokenType.Colon, "Expected ':' in ternary expression");
+            const falseExpr = this.parse_expr();
+            return {
+                kind: "TernaryExpr",
+                condition: left,
+                trueExpr,
+                falseExpr
+            } as TernaryExpr;
+        }
+        
         return left;
     }
 
@@ -265,12 +279,6 @@ export default class Parser {
                 right,
                 operator
             } as BinaryExpr;
-        }
-
-        if (this.at().type === TokenType.Colon && this.at().value === '?') {
-            this.eat(); // consume '?'
-            const trueExpr = this.parse_comparison_expr();
-            return trueExpr;
         }
 
         return left;
@@ -311,7 +319,7 @@ export default class Parser {
     }
 
     private parse_call_member_expr(): Expr {
-        let member = this.parse_primary_expr();
+        let member = this.parse_member_expr();
 
         while (this.at().type == TokenType.OpenParen) {
             member = this.parse_call_expr(member);
@@ -411,6 +419,17 @@ export default class Parser {
             return {
                 kind: "UnaryExpr",
                 operator: "!",
+                operand: expr
+            } as UnaryExpr;
+        }
+
+        // Handle negative numbers as unary minus
+        if (tk == TokenType.BinaryOperator && this.at().value == "-") {
+            this.eat(); // consume -
+            const expr = this.parse_primary_expr();
+            return {
+                kind: "UnaryExpr",
+                operator: "-",
                 operand: expr
             } as UnaryExpr;
         }

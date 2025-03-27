@@ -1,0 +1,89 @@
+// Ternary Operator Test
+// Simple test to verify the ternary operator works
+
+// First, let's try simple boolean conditions
+let isTrue = frfr;
+let isFalse = cap;
+
+// Basic ternary with boolean literal condition
+buss("Simple ternary with boolean literals:");
+typeshii testTernary1() {
+    return frfr ? "This is true" : "This is false";
+}
+let result1 = testTernary1();
+buss("frfr ? 'This is true' : 'This is false' =>", result1);
+
+typeshii testTernary2() {
+    return cap ? "This is true" : "This is false";
+}
+let result2 = testTernary2();
+buss("cap ? 'This is true' : 'This is false' =>", result2);
+
+// Ternary with variables as conditions
+buss("\nTernary with boolean variables:");
+typeshii testTernary3(condition) {
+    return condition ? "isTrue is true" : "isTrue is false";
+}
+let result3 = testTernary3(isTrue);
+buss("isTrue ? 'isTrue is true' : 'isTrue is false' =>", result3);
+
+let result4 = testTernary3(isFalse);
+buss("isFalse ? 'isFalse is true' : 'isFalse is false' =>", result4);
+
+// Ternary with comparison expressions
+buss("\nTernary with comparison expressions:");
+let x = 10;
+let y = 20;
+
+typeshii compareValues(a, b) {
+    return a > b ? "a is greater than b" : "a is not greater than b";
+}
+
+let result5 = compareValues(x, y);
+buss("x > y ? 'x is greater than y' : 'x is not greater than y' =>", result5);
+
+let result6 = compareValues(y, x);
+buss("y > x ? 'y is greater than x' : 'y is not greater than x' =>", compareValues(y, x));
+
+// Ternary with numeric results
+buss("\nTernary with numeric results:");
+typeshii getMax(a, b) {
+    return a > b ? a : b;
+}
+let result7 = getMax(x, y);
+buss("x > y ? x : y =>", result7);
+
+typeshii getMin(a, b) {
+    return a < b ? a : b;
+}
+let result8 = getMin(x, y);
+buss("x < y ? x : y =>", result8);
+
+// Nested ternary expressions
+buss("\nNested ternary expressions:");
+let a = 5;
+let b = 10;
+let c = 15;
+
+typeshii findMax(a, b, c) {
+    return a > b ? (a > c ? a : c) : (b > c ? b : c);
+}
+let max = findMax(a, b, c);
+// Use separate strings and values to avoid string concatenation issues
+buss("max of", a, ",", b, ",", c, "is:", max);
+
+// Function using ternary
+buss("\nFunction using ternary:");
+typeshii abs(n) {
+    return n < 0 ? (0 - n) : n;  // Use 0 - n instead of -n
+}
+
+// Test positive number
+let posTest = 5;
+buss("abs(5) =", abs(posTest));
+
+// Test negative number
+let negTest = 0 - 5;  // Use 0 - 5 instead of -5
+buss("abs(-5) =", abs(negTest));
+
+buss("\nAll ternary tests completed successfully!"); 

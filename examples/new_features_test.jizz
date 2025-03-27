@@ -1,0 +1,119 @@
+// New Features Test for JIZZ Language
+
+// 1. Ternary operator tests
+buss("\n=== Ternary Operator Tests ===");
+
+let x = 10;
+let y = 5;
+
+// Basic ternary operator usage - we need to call a function to get a value
+let comparison = x > y;
+typeshii getResult(condition) {
+    return condition ? "x is greater" : "y is greater";
+}
+let result = getResult(comparison);
+buss("Result of comparison:", result);
+
+// Value-based comparison
+let a = 15;
+let b = 15;
+let c = 10;
+
+// Using a function to get max value
+typeshii getMax(a, b, c) {
+    if (a > b) {
+        if (a > c) {
+            return a;
+        } else {
+            return c;
+        }
+    } else {
+        if (b > c) {
+            return b;
+        } else {
+            return c;
+        }
+    }
+}
+let maxVal = getMax(a, b, c);
+buss("Max of", a, b, c, "is:", maxVal);
+
+// Function returning different messages
+typeshii getMessage(value) {
+    if (value > 10) {
+        return "Greater than 10";
+    } else {
+        return "Less than or equal to 10";
+    }
+}
+
+buss("getMessage(15):", getMessage(15));
+buss("getMessage(5):", getMessage(5));
+
+// 2. Enhanced Math library tests
+buss("\n=== Math Library Tests ===");
+
+// Constants
+buss("Math.PI:", Math.PI);
+buss("Math.E:", Math.E);
+
+// Basic functions
+buss("Math.floor(5.7):", Math.floor(5.7));
+buss("Math.ceil(5.2):", Math.ceil(5.2));
+buss("Math.round(5.5):", Math.round(5.5));
+buss("Math.abs(-10):", Math.abs(-10));
+
+// More advanced functions
+buss("Math.sqrt(16):", Math.sqrt(16));
+buss("Math.pow(2, 3):", Math.pow(2, 3));
+buss("Math.min(3, 7, 2, 9):", Math.min(3, 7, 2, 9));
+buss("Math.max(3, 7, 2, 9):", Math.max(3, 7, 2, 9));
+
+// Random number (will vary)
+buss("Random number between 0 and 1:", Math.random());
+
+// Generate random integer between min and max (inclusive)
+typeshii randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+buss("Random number between 1 and 10:", randomInt(1, 10));
+buss("Random number between 20 and 30:", randomInt(20, 30));
+
+// 3. Combined examples
+buss("\n=== Combined Features Examples ===");
+
+// Using Math functions
+let num = 16;
+let sqrtResult = Math.sqrt(num);
+let isPerfectSquare = (sqrtResult % 1) === 0;
+let perfectSquareMsg = "";
+if (isPerfectSquare) {
+    perfectSquareMsg = "a perfect square";
+} else {
+    perfectSquareMsg = "not a perfect square";
+}
+buss("Square root of", num, "is", sqrtResult, "which is", perfectSquareMsg);
+
+// Calculate hypotenuse of a right triangle
+typeshii hypotenuse(a, b) {
+    return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+}
+
+let side1 = 3;
+let side2 = 4;
+buss("Hypotenuse of a right triangle with sides", side1, "and", side2, "is:", hypotenuse(side1, side2));
+
+// Custom abs function
+typeshii myAbs(value) {
+    if (value < 0) {
+        return -value;
+    } else {
+        return value;
+    }
+}
+
+buss("Custom abs function on -5:", myAbs(-5));
+buss("Custom abs function on 8:", myAbs(8));
+
+buss("\nAll tests completed successfully!"); 

@@ -1,0 +1,36 @@
+// Test for negative numbers in JIZZ language
+
+// Basic negative numbers
+let a = -10;
+buss("Negative number a =", a);
+
+// Arithmetic with negative numbers
+let b = 5;
+let sum = a + b;
+buss("a + b =", sum);
+
+// Negative number in expressions
+let c = -5 * 3;
+buss("c = -5 * 3 =", c);
+
+// Double negation
+let d = -(-10);
+buss("d = -(-10) =", d);
+
+// Function with negative numbers
+typeshii negate(num) {
+    return -num;
+}
+
+let e = negate(7);
+buss("negate(7) =", e);
+
+// Comparison with negative numbers
+buss("-5 < 10:", -5 < 10);
+buss("-5 > -10:", -5 > -10);
+
+// Ternary with negative numbers
+let f = -5 > -10 ? "yes" : "no";
+buss("-5 > -10 ?", f);
+
+buss("All negative number tests completed successfully!"); 

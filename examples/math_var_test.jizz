@@ -1,0 +1,10 @@
+// Math test with variables
+
+// Store Math.PI in a variable
+let pi = Math.PI;
+buss("PI value is:", pi);
+
+// Use Math.floor through a variable
+let val = 5.7;
+let floorVal = Math.floor(val);
+buss("Floor of 5.7 is:", floorVal); 

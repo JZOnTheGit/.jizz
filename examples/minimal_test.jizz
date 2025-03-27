@@ -1,0 +1,9 @@
+// Minimal test
+
+// Just print a number
+let num = 42;
+buss("Number:", num);
+
+// Simple calculation
+let sum = 2 + 2;
+buss("2 + 2 =", sum); 

@@ -1,0 +1,45 @@
+// Game Functions Test
+
+// Test creating a window
+buss("Creating a game window...");
+let window = createWindow("JIZZ Game Test", 640, 480);
+buss("Window created:", window);
+
+// Test drawing functions
+buss("Testing drawing functions...");
+clear("black");
+drawRect(100, 100, 50, 50, "red");
+drawCircle(200, 200, 25, "blue");
+drawText("Hello JIZZ Game!", 50, 50, "white", 16);
+
+// Test collision detection
+buss("Testing collision detection...");
+let collision1 = checkRectCollision(0, 0, 50, 50, 25, 25, 50, 50);
+buss("Rectangles colliding:", collision1);
+
+let collision2 = checkRectCollision(0, 0, 50, 50, 100, 100, 50, 50);
+buss("Rectangles not colliding:", collision2);
+
+let circle1 = checkCircleCollision(0, 0, 25, 30, 30, 25);
+buss("Circles colliding:", circle1);
+
+let circle2 = checkCircleCollision(0, 0, 25, 100, 100, 25);
+buss("Circles not colliding:", circle2);
+
+// Test input handling
+buss("Testing input handling...");
+buss("Is left key pressed:", isKeyPressed("left"));
+buss("Is right key pressed:", isKeyPressed("right"));
+buss("Is space key pressed:", isKeyPressed("space"));
+
+// Test sound functions
+buss("Testing sound functions...");
+playSound("test_sound", 0.5);
+stopSound("test_sound");
+
+// Test game loop (just create the function but don't start it)
+typeshii testGameLoop() {
+    buss("Game loop running");
+}
+
+buss("Game functions tests completed successfully!"); 
