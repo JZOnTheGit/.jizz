@@ -1,0 +1,25 @@
+// Escape Sequences Test
+// This file tests if escape sequences like \n and \t work properly
+
+// Test newline (\n)
+buss("Line 1\nLine 2");
+
+// Test multiple newlines
+buss("First line\nSecond line\nThird line");
+
+// Test tab (\t)
+buss("Name:\tJohn");
+
+// Test combined escape sequences
+buss("Item\tPrice\tQuantity\n-----\t-----\t--------\nApple\t$1.00\t5\nBanana\t$0.50\t10");
+
+// Test with variables
+let name = "Alice";
+let age = 30;
+buss("Name: " + name + "\nAge: " + age);
+
+// Test with multiple arguments
+buss("User info:", "\nName:", name, "\nAge:", age);
+
+// Test completed message
+buss("\nEscape sequences test completed successfully!"); 

@@ -95,7 +95,10 @@ export function createGlobalEnv(){
     // Add built-in print function (buss)
     env.declareVar("buss", MK_NATIVE_FN((args, _) => {
         const output = args.map(arg => {
-            if (arg.type === "string") return (arg as StringValue).value;
+            if (arg.type === "string") {
+                // Process escape sequences in strings
+                return processEscapeSequences((arg as StringValue).value);
+            }
             else if (arg.type === "number") return (arg as NumberValue).value;
             else if (arg.type === "boolean") return (arg as BooleanValue).value ? "frfr" : "cap";
             else if (arg.type === "null") return "null";
@@ -106,6 +109,17 @@ export function createGlobalEnv(){
         console.log(output);
         return MK_NULL();
     }), true);
+
+    // Helper function to process escape sequences
+    function processEscapeSequences(str: string): string {
+        return str
+            .replace(/\\n/g, '\n')
+            .replace(/\\t/g, '\t')
+            .replace(/\\r/g, '\r')
+            .replace(/\\'/g, '\'')
+            .replace(/\\"/g, '\"')
+            .replace(/\\\\/g, '\\');
+    }
 
     // Add String_ functions to global scope
     env.declareVar("String_length", MK_NATIVE_FN((args, _) => {

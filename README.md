@@ -186,6 +186,10 @@ buss(greeting);  // Output: Hello, John!
 buss(String_length(greeting));      // Output: 12
 buss(String_toUpperCase(greeting)); // Output: HELLO, JOHN!
 buss(String_substring(greeting, 0, 5)); // Output: Hello
+
+// Escape sequences in strings
+buss("Line 1\nLine 2");  // Outputs two lines
+buss("Name:\tJohn");     // Outputs with tab spacing
 ```
 
 ### Objects
@@ -290,7 +294,7 @@ buss("Short-circuit AND:", result);  // false
 
 result = frfr || functionShouldNotRun();  // Function is not called
 buss("Short-circuit OR:", result);  // true
-```
+
 
 // Define the function referenced above
 typeshii functionShouldNotRun() {

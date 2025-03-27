@@ -88,7 +88,11 @@ typeshii calculateHypotenuse(a, b) {
     return JizzMath.sqrt(JizzMath.pow(a, 2) + JizzMath.pow(b, 2));
 }
 
-buss("Hypotenuse of triangle with sides 3 and 4:", calculateHypotenuse(3, 4));
-buss("Hypotenuse of triangle with sides 5 and 12:", calculateHypotenuse(5, 12));
+// Display results in a formatted table
+buss("Triangle sides\tHypotenuse");
+buss("-------------\t----------");
+buss("3, 4\t\t", calculateHypotenuse(3, 4));
+buss("5, 12\t\t", calculateHypotenuse(5, 12));
+buss("8, 15\t\t", calculateHypotenuse(8, 15));
 
 buss("\nAll JizzMath tests completed successfully!"); 

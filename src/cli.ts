@@ -202,6 +202,107 @@ typeshii greet(name) {
 // Function calls
 let result = greet("World");
 buss(result);
+
+
+//JizzMath Module
+
+// Constants
+buss("=== JizzMath Constants ===");
+buss("JizzMath.PI:", JizzMath.PI);
+buss("JizzMath.E:", JizzMath.E);
+
+// Basic rounding functions
+buss("\n=== Basic Rounding Functions ===");
+let value = 5.7;
+buss("Original value:", value);
+buss("JizzMath.floor(5.7):", JizzMath.floor(value));
+buss("JizzMath.ceil(5.7):", JizzMath.ceil(value));
+buss("JizzMath.round(5.7):", JizzMath.round(value));
+
+value = 5.2;
+buss("\nOriginal value:", value);
+buss("JizzMath.floor(5.2):", JizzMath.floor(value));
+buss("JizzMath.ceil(5.2):", JizzMath.ceil(value));
+buss("JizzMath.round(5.2):", JizzMath.round(value));
+
+value = 5.5;
+buss("\nOriginal value:", value);
+buss("JizzMath.floor(5.5):", JizzMath.floor(value));
+buss("JizzMath.ceil(5.5):", JizzMath.ceil(value));
+buss("JizzMath.round(5.5):", JizzMath.round(value));
+
+// Absolute value
+buss("\n=== Absolute Value ===");
+let posNum = 10;
+buss("JizzMath.abs(10):", JizzMath.abs(posNum));
+
+let negNum = 0 - 10;  // Instead of -10 directly
+buss("JizzMath.abs(-10):", JizzMath.abs(negNum));
+
+buss("JizzMath.abs(0):", JizzMath.abs(0));
+
+// Square root
+buss("\n=== Square Root ===");
+let num16 = 16;
+buss("JizzMath.sqrt(16):", JizzMath.sqrt(num16));
+let num2 = 2;
+buss("JizzMath.sqrt(2):", JizzMath.sqrt(num2));
+buss("JizzMath.sqrt(0):", JizzMath.sqrt(0));
+
+// Power
+buss("\n=== Power Function ===");
+buss("JizzMath.pow(2, 3):", JizzMath.pow(2, 3));
+let base = 4;
+let exp = 0.5;
+buss("JizzMath.pow(4, 0.5):", JizzMath.pow(base, exp));
+buss("JizzMath.pow(9, 0.5):", JizzMath.pow(9, exp));
+buss("JizzMath.pow(5, 2):", JizzMath.pow(5, 2));
+
+// Min and Max
+buss("\n=== Min and Max Functions ===");
+buss("JizzMath.min(3, 7, 2, 9):", JizzMath.min(3, 7, 2, 9));
+buss("JizzMath.max(3, 7, 2, 9):", JizzMath.max(3, 7, 2, 9));
+
+// Use variables for negative values
+let negTen = 0 - 10;
+buss("JizzMath.min(-10, 0, 10):", JizzMath.min(negTen, 0, 10));
+buss("JizzMath.max(-10, 0, 10):", JizzMath.max(negTen, 0, 10));
+
+// Random
+buss("\n=== Random Function ===");
+let rand1 = JizzMath.random();
+buss("JizzMath.random():", rand1);
+let rand2 = JizzMath.random();
+buss("JizzMath.random():", rand2);
+let rand3 = JizzMath.random();
+buss("JizzMath.random():", rand3);
+
+// Example: Random integer in range
+typeshii randomInt(min, max) {
+    return JizzMath.floor(JizzMath.random() * (max - min + 1) + min);
+}
+
+buss("\nRandom integers in range (1-10):");
+buss("Random integer:", randomInt(1, 10));
+buss("Random integer:", randomInt(1, 10));
+buss("Random integer:", randomInt(1, 10));
+
+// Practical example: Pythagorean theorem
+buss("\n=== Practical Example: Pythagorean Theorem ===");
+typeshii calculateHypotenuse(a, b) {
+    return JizzMath.sqrt(JizzMath.pow(a, 2) + JizzMath.pow(b, 2));
+}
+
+buss("Hypotenuse of triangle with sides 3 and 4:", calculateHypotenuse(3, 4));
+buss("Hypotenuse of triangle with sides 5 and 12:", calculateHypotenuse(5, 12));
+
+// Demonstration of escape sequences
+buss("\n=== Escape Sequences ===");
+buss("Line 1\nLine 2\nLine 3");
+buss("Item\tPrice\tQuantity");
+buss("-----\t-----\t--------");
+buss("Apple\t$1.00\t5");
+buss("Orange\t$0.75\t10");
 `));
   });
 

@@ -1,0 +1,19 @@
+// MathTest.jizz
+// Simple test to check if JizzMath is properly registered in the global environment
+
+// Test if buss is working
+buss("MathTest.jizz is running");
+
+// Test if JizzMath is available
+buss("Testing JizzMath availability...");
+
+// Try accessing JizzMath
+buss("JizzMath.PI:", JizzMath.PI);
+buss("JizzMath.floor(5.7):", JizzMath.floor(5.7));
+
+// Test the abs function for negative numbers
+let negValue = 0 - 10;  // Using 0 - 10 instead of -10 directly
+buss("JizzMath.abs(-10):", JizzMath.abs(negValue));
+
+// Confirm test completed
+buss("MathTest.jizz completed successfully"); 
