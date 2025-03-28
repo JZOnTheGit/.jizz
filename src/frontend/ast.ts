@@ -23,6 +23,9 @@ export type NodeType =
 | "ForStatement"
 | "ReturnStatement"
 | "ArrayLiteral"
+| "TryStatement"
+| "CatchClause"
+| "ThrowStatement"
 
 | "Property"
 | "ObjectLiteral";
@@ -162,6 +165,23 @@ export interface UnaryExpr extends Expr {
     kind: "UnaryExpr";
     operator: string;  // Currently just "!" for logical NOT
     operand: Expr;
+}
+
+export interface TryStatement extends Stmt {
+    kind: "TryStatement";
+    tryBlock: Stmt[];
+    catchClause: CatchClause;
+}
+
+export interface CatchClause extends Stmt {
+    kind: "CatchClause";
+    parameter: string;
+    body: Stmt[];
+}
+
+export interface ThrowStatement extends Stmt {
+    kind: "ThrowStatement";
+    argument: Expr;
 }
 
 

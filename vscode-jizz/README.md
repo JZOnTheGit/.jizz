@@ -7,6 +7,7 @@ This extension provides syntax highlighting and custom file icons for the JIZZ p
 - Syntax highlighting for JIZZ code files (.jizz)
 - Custom file icons for .jizz files in the file explorer
 - Support for JIZZ-specific keywords like `frfr`, `cap`, `typeshii`, `skibidi`, `too`, and `buss`
+- Error handling keywords: `try`, `catch`, and `throw`
 - Proper highlighting for strings, numbers, and comments
 - Bracket matching for easier code navigation
 
@@ -46,6 +47,13 @@ JIZZ is a modern programming language with unique "brainrot" syntax inspired by 
 - Use `too` instead of `for` in loop constructs
 - Use `buss` for printing to console (bussin')
 - Use `typeshii` for function declarations
+- Use `try`/`catch`/`throw` for error handling
+
+## New in Version 1.2.0
+
+- Added support for error handling keywords: `try`, `catch`, and `throw`
+- Improved syntax highlighting for new language features
+- Bug fixes and performance improvements
 
 ## Installing the JIZZ Language
 

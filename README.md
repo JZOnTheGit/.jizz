@@ -102,11 +102,156 @@ To enable the custom file icons:
 - Type conversion functions (int, str)
 - Logical operators (AND, OR, NOT) with short-circuit evaluation
 - Comparison operators for complex conditions
-- Array support with numeric indices
-- Game development with the Game module
+- Comprehensive array operations with built-in methods
 - **Ternary operator for concise conditional expressions**
 - **JizzMath module with mathematical functions and constants**
 - **Full support for negative numbers**
+- **Error handling with try-catch and throw**
+
+## Array Operations
+
+JIZZ provides a comprehensive set of array operations that let you manipulate arrays with ease. These operations are designed to be familiar to developers coming from other languages, while maintaining the JIZZ philosophy.
+
+### Creating and Accessing Arrays
+
+```javascript
+// Create an array
+let numbers = [1, 2, 3, 4, 5];
+
+// Access elements by index
+let firstElement = numbers[0];  // 1
+let lastElement = numbers[4];   // 5
+
+// Modify elements
+numbers[2] = 99;
+buss(numbers);  // [1, 2, 99, 4, 5]
+
+// Get array length
+let length = arrayLength(numbers);  // 5
+```
+
+### Array Manipulation Methods
+
+JIZZ provides the following methods for array manipulation:
+
+#### `push(array, element1, element2, ...)`
+Adds one or more elements to the end of an array and returns the new length.
+
+```javascript
+let arr = [1, 2, 3];
+push(arr, 4);          // Adds a single element
+buss(arr);             // [1, 2, 3, 4]
+
+push(arr, 5, 6, 7);    // Add multiple elements
+buss(arr);             // [1, 2, 3, 4, 5, 6, 7]
+```
+
+#### `pop(array)`
+Removes the last element from an array and returns that element.
+
+```javascript
+let arr = [1, 2, 3, 4];
+let last = pop(arr);   // Removes and returns 4
+buss(arr);             // [1, 2, 3]
+```
+
+#### `shift(array)`
+Removes the first element from an array and returns that element.
+
+```javascript
+let arr = [1, 2, 3];
+let first = shift(arr);  // Removes and returns 1
+buss(arr);               // [2, 3]
+```
+
+#### `unshift(array, element1, element2, ...)`
+Adds one or more elements to the beginning of an array and returns the new length.
+
+```javascript
+let arr = [3, 4, 5];
+unshift(arr, 1, 2);    // Adds elements to the beginning
+buss(arr);             // [1, 2, 3, 4, 5]
+```
+
+#### `join(array, separator)`
+Joins all elements of an array into a string using the specified separator.
+
+```javascript
+let arr = ["Hello", "JIZZ", "World"];
+let str = join(arr, " ");     // Joins with space
+buss(str);                    // "Hello JIZZ World"
+
+let csv = join(arr, ",");     // Joins with comma
+buss(csv);                    // "Hello,JIZZ,World"
+```
+
+#### `includes(array, element)`
+Determines whether an array includes a certain element, returning a boolean value.
+
+```javascript
+let arr = [10, 20, 30, 40];
+let hasValue = includes(arr, 30);   // frfr
+let noValue = includes(arr, 50);    // cap
+```
+
+#### `reverse(array)`
+Reverses an array in place and returns the array.
+
+```javascript
+let arr = [1, 2, 3, 4, 5];
+reverse(arr);
+buss(arr);   // [5, 4, 3, 2, 1]
+```
+
+### Complex Array Operations
+
+JIZZ arrays can be used for more complex operations like:
+
+#### Multidimensional Arrays
+```javascript
+// 2D array (matrix)
+let matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+];
+
+// Access nested elements
+let element = matrix[1][2];   // 6
+
+// Modify nested elements
+matrix[0][2] = 30;
+```
+
+#### Arrays of Objects
+```javascript
+// Array of person objects
+let people = [
+    { name: "Alice", age: 30 },
+    { name: "Bob", age: 25 },
+    { name: "Charlie", age: 35 }
+];
+
+// Access object properties in arrays
+buss(people[1].name);   // "Bob"
+
+// Modify object properties
+people[0].age = 31;
+```
+
+#### Dynamic Arrays
+```javascript
+// Create an empty array and add elements dynamically
+let dynamicArray = [];
+push(dynamicArray, "first");
+push(dynamicArray, "second");
+
+// Create sparse arrays (with gaps)
+let sparse = [];
+sparse[0] = 10;
+sparse[5] = 50;
+buss(sparse);  // [10, undefined, undefined, undefined, undefined, 50]
+```
 
 ## Development
 
@@ -379,5 +524,70 @@ typeshii calculateHypotenuse(a, b) {
     return JizzMath.sqrt(JizzMath.pow(a, 2) + JizzMath.pow(b, 2));
 }
 buss(calculateHypotenuse(3, 4));  // 5
+```
+
+### Error Handling with Try-Catch
+
+JIZZ provides robust error handling through try-catch blocks and the throw statement:
+
+```javascript
+// Basic try-catch
+try {
+    // Code that might cause an error
+    let result = 10 / 0;
+    buss("This won't execute if an error occurs");
+} catch (error) {
+    // Handle the error
+    buss("An error occurred:", error);
+}
+
+// Throwing custom errors
+try {
+    let age = -5;
+    if (age < 0) {
+        throw "Age cannot be negative";
+    }
+    buss("Age is valid:", age);
+} catch (e) {
+    buss("Validation error:", e);
+}
+
+// Try-catch with functions
+typeshii divideNumbers(a, b) {
+    try {
+        if (b === 0) {
+            throw "Division by zero is not allowed";
+        }
+        return a / b;
+    } catch (error) {
+        return "Error: " + error;
+    }
+}
+
+buss(divideNumbers(10, 2));  // 5
+buss(divideNumbers(10, 0));  // "Error: Division by zero is not allowed"
+
+// Nested try-catch blocks
+try {
+    buss("Outer try block");
+    try {
+        buss("Inner try block");
+        throw "Inner error";
+    } catch (innerError) {
+        buss("Caught inner error:", innerError);
+        // Rethrow or throw a new error
+        throw "Rethrown from inner catch";
+    }
+} catch (outerError) {
+    buss("Caught in outer catch:", outerError);
+}
+
+// Try-catch with objects
+try {
+    throw { code: 404, message: "Not found" };
+} catch (objError) {
+    buss("Error code:", objError.code);
+    buss("Error message:", objError.message);
+}
 ```
 

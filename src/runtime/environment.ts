@@ -1,7 +1,7 @@
-import { MK_BOOL, MK_NATIVE_FN, MK_NULL, MK_NUMBER, RuntimeValue, NumberValue, StringValue, BooleanValue, ObjectValue, MK_STRING } from "./values";
+import { MK_BOOL, MK_NATIVE_FN, MK_NULL, MK_NUMBER, RuntimeValue, NumberValue, StringValue, BooleanValue, ObjectValue, MK_STRING, NativeFnValue } from "./values";
 import { StringPrototype } from "./stdlib/string";
-import * as GameFunctions from "./stdlib/game";
 import { setupJizzMath } from "./stdlib/jizzmath";
+import { setupArrayMethods } from "./stdlib/array";
 
 export function createGlobalEnv(){
     const env = new Environment();
@@ -12,19 +12,73 @@ export function createGlobalEnv(){
     // Add JizzMath instead of the built-in Math
     setupJizzMath(env);
 
-    // Add Game functions directly to environment (not as an object)
-    env.declareVar("createWindow", GameFunctions.createWindow, true);
-    env.declareVar("closeWindow", GameFunctions.closeWindow, true);
-    env.declareVar("clear", GameFunctions.clear, true);
-    env.declareVar("drawRect", GameFunctions.drawRect, true);
-    env.declareVar("drawCircle", GameFunctions.drawCircle, true);
-    env.declareVar("drawText", GameFunctions.drawText, true);
-    env.declareVar("isKeyPressed", GameFunctions.isKeyPressed, true);
-    env.declareVar("startGameLoop", GameFunctions.startGameLoop, true);
-    env.declareVar("checkRectCollision", GameFunctions.checkRectCollision, true);
-    env.declareVar("checkCircleCollision", GameFunctions.checkCircleCollision, true);
-    env.declareVar("playSound", GameFunctions.playSound, true);
-    env.declareVar("stopSound", GameFunctions.stopSound, true);
+    // Add Array methods
+    setupArrayMethods(env);
+
+    // Add top-level array function wrappers for easier use
+    env.declareVar("push", MK_NATIVE_FN((args, env) => {
+        if (args.length < 2) {
+            throw "push() requires at least two arguments: array and element to push";
+        }
+        const nativeFn = env.lookupVar("Array_push") as NativeFnValue;
+        return nativeFn.call(args, env);
+    }), true);
+    
+    env.declareVar("pop", MK_NATIVE_FN((args, env) => {
+        if (args.length < 1) {
+            throw "pop() requires an array argument";
+        }
+        const nativeFn = env.lookupVar("Array_pop") as NativeFnValue;
+        return nativeFn.call(args, env);
+    }), true);
+    
+    env.declareVar("shift", MK_NATIVE_FN((args, env) => {
+        if (args.length < 1) {
+            throw "shift() requires an array argument";
+        }
+        const nativeFn = env.lookupVar("Array_shift") as NativeFnValue;
+        return nativeFn.call(args, env);
+    }), true);
+    
+    env.declareVar("unshift", MK_NATIVE_FN((args, env) => {
+        if (args.length < 2) {
+            throw "unshift() requires at least two arguments: array and element to add";
+        }
+        const nativeFn = env.lookupVar("Array_unshift") as NativeFnValue;
+        return nativeFn.call(args, env);
+    }), true);
+    
+    env.declareVar("arrayLength", MK_NATIVE_FN((args, env) => {
+        if (args.length < 1) {
+            throw "arrayLength() requires an array argument";
+        }
+        const nativeFn = env.lookupVar("Array_length") as NativeFnValue;
+        return nativeFn.call(args, env);
+    }), true);
+    
+    env.declareVar("join", MK_NATIVE_FN((args, env) => {
+        if (args.length < 1) {
+            throw "join() requires at least one argument (the array)";
+        }
+        const nativeFn = env.lookupVar("Array_join") as NativeFnValue;
+        return nativeFn.call(args, env);
+    }), true);
+    
+    env.declareVar("includes", MK_NATIVE_FN((args, env) => {
+        if (args.length < 2) {
+            throw "includes() requires at least two arguments: array and element to find";
+        }
+        const nativeFn = env.lookupVar("Array_includes") as NativeFnValue;
+        return nativeFn.call(args, env);
+    }), true);
+    
+    env.declareVar("reverse", MK_NATIVE_FN((args, env) => {
+        if (args.length < 1) {
+            throw "reverse() requires an array argument";
+        }
+        const nativeFn = env.lookupVar("Array_reverse") as NativeFnValue;
+        return nativeFn.call(args, env);
+    }), true);
 
     // Add ask function for user input
     env.declareVar("ask", MK_NATIVE_FN((args, _) => {

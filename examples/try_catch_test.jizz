@@ -1,0 +1,152 @@
+// Try-Catch Test in JIZZ
+// This demonstrates error handling with try-catch and throw
+
+buss("=== TRY-CATCH TEST ===");
+
+// Example 1: Basic try-catch with error
+buss("\n1. Basic try-catch with error:");
+try {
+    buss("  Attempting to divide by zero...");
+    let x = 10;
+    let y = 0;
+    let result = x / y;
+    throw "Division by zero error";
+    buss("  This line shouldn't execute");
+} catch (error) {
+    buss("  Caught error:", error);
+}
+
+// Example 2: Manual error throwing
+buss("\n2. Manual error throwing:");
+try {
+    buss("  Throwing a custom error...");
+    throw "This is a custom error message";
+    buss("  This line shouldn't execute");
+} catch (e) {
+    buss("  Caught custom error:", e);
+}
+
+// Example 3: Nested try-catch
+buss("\n3. Nested try-catch blocks:");
+try {
+    buss("  Outer try block");
+    try {
+        buss("  Inner try block");
+        throw "Inner error";
+        buss("  This line shouldn't execute");
+    } catch (innerError) {
+        buss("  Caught inner error:", innerError);
+        throw "Rethrown error from inner catch";
+    }
+    buss("  This line shouldn't execute either");
+} catch (outerError) {
+    buss("  Caught outer error:", outerError);
+}
+
+// Example 4: Function with try-catch
+typeshii riskyFunction(value) {
+    if (value < 0) {
+        throw "Value cannot be negative";
+    }
+    return value * 2;
+}
+
+buss("\n4. Try-catch with functions:");
+try {
+    let result1 = riskyFunction(5);
+    buss("  Positive result:", result1);
+    
+    let result2 = riskyFunction(-5);
+    buss("  This line shouldn't execute");
+} catch (funcError) {
+    buss("  Function error caught:", funcError);
+}
+
+// Example 5: Try-catch with object error
+buss("\n5. Try-catch with object error:");
+try {
+    throw { code: 404, message: "Not found" };
+} catch (objError) {
+    buss("  Caught object error:");
+    buss("  Error code:", objError.code);
+    buss("  Error message:", objError.message);
+}
+
+// Example 6: Try-catch with array validation
+buss("\n6. Try-catch with array validation:");
+typeshii validateArray(arr, minLength) {
+    try {
+        if (arr == null) {
+            throw "Array is null";
+        }
+        
+        if (arrayLength(arr) < minLength) {
+            throw "Array is too short (minimum length: " + minLength + ")";
+        }
+        
+        return frfr; // Valid array
+    } catch (validationError) {
+        buss("  Validation error:", validationError);
+        return cap; // Invalid array
+    }
+}
+
+let arr1 = [1, 2, 3, 4, 5];
+let arr2 = [1];
+let arr3;
+
+buss("  Validating array1 (length 5, min 3):", validateArray(arr1, 3) ? "Valid" : "Invalid");
+buss("  Validating array2 (length 1, min 3):", validateArray(arr2, 3) ? "Valid" : "Invalid");
+buss("  Validating array3 (undefined, min 3):", validateArray(arr3, 3) ? "Valid" : "Invalid");
+
+// Example 7: Error handling with custom logic
+buss("\n7. Error handling with custom logic:");
+typeshii divideNumbers(a, b) {
+    try {
+        if (b == 0) {
+            throw "Division by zero is not allowed";
+        }
+        
+        return a / b;
+    } catch (e) {
+        return "Error: " + e;
+    }
+}
+
+buss("  10 / 2 =", divideNumbers(10, 2));
+buss("  10 / 0 =", divideNumbers(10, 0));
+
+// Example 8: Try-catch in complex logic
+buss("\n8. Complex error handling:");
+typeshii processData(data) {
+    try {
+        // Validate input
+        if (data == null) {
+            throw "Input data is null or undefined";
+        }
+        
+        // Process data (simulated with conditional)
+        if (data.value < 0) {
+            throw "Data validation failed: negative value";
+        }
+        
+        // Return processed result
+        return { status: "success", result: data.value * 2 };
+    } catch (processingError) {
+        return { status: "error", message: processingError };
+    }
+}
+
+let goodData = { value: 42 };
+let badData = { value: -10 };
+let noData;
+
+let processResult1 = processData(goodData);
+let processResult2 = processData(badData);
+let processResult3 = processData(noData);
+
+buss("  Processing valid data:", processResult1.status, processResult1.result);
+buss("  Processing invalid data:", processResult2.status, processResult2.message);
+buss("  Processing null data:", processResult3.status, processResult3.message);
+
+buss("\n=== TRY-CATCH TEST COMPLETED ==="); 

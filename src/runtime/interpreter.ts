@@ -1,7 +1,7 @@
 import { RuntimeValue, NumberValue, MK_NULL, MK_STRING, StringValue, MK_BOOL} from "./values";
-import { NodeType, Stmt, Program, Expr, BinaryExpr, NumericLiteral, StringLiteral, Identifier, VarDeclaration, AssignmentExpr, ObjectLiteral, CallExpr, MemberExpr, FunctionDeclaration, IfStatement, WhileStatement, ForStatement, ReturnStatement, LogicalExpr, TernaryExpr, ArrayLiteral, UnaryExpr} from "../frontend/ast";
+import { NodeType, Stmt, Program, Expr, BinaryExpr, NumericLiteral, StringLiteral, Identifier, VarDeclaration, AssignmentExpr, ObjectLiteral, CallExpr, MemberExpr, FunctionDeclaration, IfStatement, WhileStatement, ForStatement, ReturnStatement, LogicalExpr, TernaryExpr, ArrayLiteral, UnaryExpr, TryStatement, ThrowStatement} from "../frontend/ast";
 import Environment from "./environment";
-import { eval_var_declaration, eval_program, eval_function_declaration, eval_if_statement, eval_while_statement, eval_for_statement } from "./eval/statements";
+import { eval_var_declaration, eval_program, eval_function_declaration, eval_if_statement, eval_while_statement, eval_for_statement, eval_try_statement, eval_throw_statement } from "./eval/statements";
 import { eval_assignment, eval_binary_expr, eval_identifier, eval_object_expr, eval_call_expr, eval_member_expr, eval_logical_expr, eval_ternary_expr, eval_array_literal, eval_unary_expr } from "./eval/expressions";
 
 export function evaluate(astNode: Stmt, env: Environment): RuntimeValue{
@@ -71,6 +71,12 @@ export function evaluate(astNode: Stmt, env: Environment): RuntimeValue{
             const returnStmt = astNode as ReturnStatement;
             return returnStmt.value ? evaluate(returnStmt.value, env) : MK_NULL();
         }
+
+        case "TryStatement":
+            return eval_try_statement(astNode as TryStatement, env);
+
+        case "ThrowStatement":
+            return eval_throw_statement(astNode as ThrowStatement, env);
 
         default:
             console.error("This AST Node has not yet been setup for interpretation:", astNode);

@@ -14,7 +14,7 @@
     "keywords": {
       "patterns": [{
         "name": "keyword.control.jizz",
-        "match": "\\b(if|else|typeshii|skibidi|too|return|let|const)\\b"
+        "match": "\\b(if|else|typeshii|skibidi|too|return|let|const|try|catch|throw)\\b"
       }, {
         "name": "constant.language.boolean.jizz",
         "match": "\\b(frfr|cap)\\b"

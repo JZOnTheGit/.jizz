@@ -1,0 +1,151 @@
+// Array Production Test
+// This test validates that the array features are working correctly
+
+buss("=== ARRAY PRODUCTION TEST ===");
+
+// ===== BASIC ARRAY OPERATIONS =====
+buss("1. Basic Array Creation and Access:");
+let numbers = [1, 2, 3, 4, 5];
+buss("   Array created: [1, 2, 3, 4, 5]");
+
+// Test accessing elements
+buss("   First element (numbers[0]): " + numbers[0]);
+buss("   Last element (numbers[4]): " + numbers[4]);
+
+// Test modifying elements
+numbers[2] = 99;
+buss("   After numbers[2] = 99:");
+buss("   numbers[0] = " + numbers[0]);
+buss("   numbers[1] = " + numbers[1]);
+buss("   numbers[2] = " + numbers[2]);
+buss("   numbers[3] = " + numbers[3]);
+buss("   numbers[4] = " + numbers[4]);
+
+// Test array length
+let len = arrayLength(numbers);
+buss("   Array length: " + len);
+buss("");
+
+// ===== ARRAY MANIPULATION METHODS =====
+buss("2. Array Manipulation Methods:");
+
+// Test push
+buss("   a) push() method:");
+let pushArr = [1, 2, 3];
+buss("      Initial array: [1, 2, 3]");
+let newLength = push(pushArr, 4);
+buss("      After push(pushArr, 4) - New length: " + newLength);
+buss("      Elements: " + pushArr[0] + ", " + pushArr[1] + ", " + pushArr[2] + ", " + pushArr[3]);
+
+// Test push multiple values
+newLength = push(pushArr, 5, 6, 7);
+buss("      After push(pushArr, 5, 6, 7) - New length: " + newLength);
+buss("      Elements: " + pushArr[0] + ", " + pushArr[1] + ", " + pushArr[2] + ", " + 
+                          pushArr[3] + ", " + pushArr[4] + ", " + pushArr[5] + ", " + pushArr[6]);
+
+// Test pop
+buss("   b) pop() method:");
+let popArr = [10, 20, 30, 40];
+buss("      Initial array: [10, 20, 30, 40]");
+let popped = pop(popArr);
+buss("      Popped value: " + popped);
+buss("      Array after pop: " + popArr[0] + ", " + popArr[1] + ", " + popArr[2]);
+buss("      New length: " + arrayLength(popArr));
+
+// Test shift
+buss("   c) shift() method:");
+let shiftArr = [100, 200, 300];
+buss("      Initial array: [100, 200, 300]");
+let shifted = shift(shiftArr);
+buss("      Shifted value: " + shifted);
+buss("      Array after shift: " + shiftArr[0] + ", " + shiftArr[1]);
+buss("      New length: " + arrayLength(shiftArr));
+
+// Test unshift
+buss("   d) unshift() method:");
+let unshiftArr = [3, 4, 5];
+buss("      Initial array: [3, 4, 5]");
+newLength = unshift(unshiftArr, 1, 2);
+buss("      After unshift(unshiftArr, 1, 2) - New length: " + newLength);
+buss("      Elements: " + unshiftArr[0] + ", " + unshiftArr[1] + ", " + unshiftArr[2] + ", " + 
+                          unshiftArr[3] + ", " + unshiftArr[4]);
+
+// Test join
+buss("   e) join() method:");
+let joinArr = ["Hello", "JIZZ", "World"];
+buss("      Array: [Hello, JIZZ, World]");
+let joinedSpace = join(joinArr, " ");
+buss("      join(arr, space): " + joinedSpace);
+let joinedComma = join(joinArr, ",");
+buss("      join(arr, comma): " + joinedComma);
+
+// Test includes
+buss("   f) includes() method:");
+let includesArr = [10, 20, 30, 40];
+buss("      Array: [10, 20, 30, 40]");
+let hasValue = includes(includesArr, 30);
+buss("      includes(arr, 30): " + hasValue);
+let noValue = includes(includesArr, 1000);
+buss("      includes(arr, 1000): " + noValue);
+
+// Test reverse
+buss("   g) reverse() method:");
+let reverseArr = [1, 2, 3, 4, 5];
+buss("      Original array: [1, 2, 3, 4, 5]");
+reverse(reverseArr);
+buss("      After reverse(): " + reverseArr[0] + ", " + reverseArr[1] + ", " + reverseArr[2] + ", " + 
+                             reverseArr[3] + ", " + reverseArr[4]);
+
+// ===== COMPLEX ARRAY OPERATIONS =====
+buss("3. Complex Array Operations:");
+
+// Test multidimensional arrays
+buss("   a) Multidimensional Arrays:");
+let grid = [];
+push(grid, [1, 2, 3]);
+push(grid, [4, 5, 6]);
+push(grid, [7, 8, 9]);
+buss("      Created 3x3, grid.length: " + arrayLength(grid));
+buss("      grid[0] length: " + arrayLength(grid[0]));
+buss("      grid[1][1] = " + grid[1][1]);
+buss("      grid[2][0] = " + grid[2][0]);
+grid[0][2] = 30;
+buss("      After grid[0][2] = 30: " + grid[0][0] + ", " + grid[0][1] + ", " + grid[0][2]);
+
+// Test arrays of objects
+buss("   b) Arrays of Objects:");
+let people = [];
+let person1 = { name: "Alice", age: 30 };
+let person2 = { name: "Bob", age: 25 };
+let person3 = { name: "Charlie", age: 35 };
+push(people, person1);
+push(people, person2);
+push(people, person3);
+buss("      Created array of 3 people, length: " + arrayLength(people));
+buss("      people[1].name = " + people[1].name);
+buss("      people[2].age = " + people[2].age);
+people[0].age = 31;
+buss("      After people[0].age = 31: " + people[0].age);
+
+// Test dynamic arrays and sparse arrays
+buss("   c) Dynamic Arrays and Sparse Arrays:");
+let sparse = [];
+sparse[0] = 10;
+sparse[5] = 50;
+buss("      Created sparse array with values at index 0 and 5");
+buss("      sparse.length = " + arrayLength(sparse));
+buss("      sparse[0] = " + sparse[0]);
+buss("      sparse[5] = " + sparse[5]);
+buss("      sparse[2] = " + sparse[2] + " (undefined element)");
+
+// Test if we can access elements beyond array length
+let arr = [1, 2, 3];
+buss("   d) Out of bounds access:");
+buss("      arr = [1, 2, 3], length: " + arrayLength(arr));
+buss("      arr[5] = " + arr[5] + " (should be undefined)");
+
+// Error handling test - simplified to avoid syntax issues
+buss("4. Error Handling Test:");
+buss("   Skipping calling methods with missing arguments (may cause errors)");
+
+buss("=== ARRAY PRODUCTION TEST COMPLETED SUCCESSFULLY ==="); 

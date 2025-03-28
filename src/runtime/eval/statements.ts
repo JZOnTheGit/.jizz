@@ -1,7 +1,7 @@
-import { FunctionDeclaration, ForStatement, IfStatement, Program, VarDeclaration, WhileStatement } from "../../frontend/ast";
+import { FunctionDeclaration, ForStatement, IfStatement, Program, VarDeclaration, WhileStatement, TryStatement, ThrowStatement } from "../../frontend/ast";
 import { evaluate } from "../interpreter";
 import Environment from "../environment";
-import { RuntimeValue, MK_NULL, FunctionValue, BooleanValue} from "../values";
+import { RuntimeValue, MK_NULL, FunctionValue, BooleanValue, MK_STRING, StringValue} from "../values";
 
 export function eval_program(program: Program, env: Environment): RuntimeValue{
     let lastEvaluated: RuntimeValue = MK_NULL();
@@ -134,4 +134,56 @@ function isTruthy(value: RuntimeValue): boolean {
         default:
             return true;
     }
+}
+
+// Export a class to represent JIZZ errors for try-catch functionality
+export class JizzError {
+    value: RuntimeValue;
+
+    constructor(value: RuntimeValue) {
+        this.value = value;
+    }
+}
+
+export function eval_try_statement(tryStmt: TryStatement, env: Environment): RuntimeValue {
+    try {
+        // Try to execute the try block
+        const tryEnv = new Environment(env);
+        let result: RuntimeValue = MK_NULL();
+        
+        for (const stmt of tryStmt.tryBlock) {
+            result = evaluate(stmt, tryEnv);
+        }
+        
+        return result;
+    } catch (error) {
+        // If an error occurs, execute the catch block
+        const catchEnv = new Environment(env);
+        let errorValue: RuntimeValue;
+        
+        // Convert the error to a RuntimeValue
+        if (error instanceof JizzError) {
+            errorValue = error.value;
+        } else if (typeof error === 'string') {
+            errorValue = MK_STRING(error);
+        } else {
+            errorValue = MK_STRING(String(error));
+        }
+        
+        // Declare the error parameter in the catch block scope
+        catchEnv.declareVar(tryStmt.catchClause.parameter, errorValue, false);
+        
+        // Execute the catch block
+        let result: RuntimeValue = MK_NULL();
+        for (const stmt of tryStmt.catchClause.body) {
+            result = evaluate(stmt, catchEnv);
+        }
+        
+        return result;
+    }
+}
+
+export function eval_throw_statement(throwStmt: ThrowStatement, env: Environment): RuntimeValue {
+    const value = evaluate(throwStmt.argument, env);
+    throw new JizzError(value);
 }

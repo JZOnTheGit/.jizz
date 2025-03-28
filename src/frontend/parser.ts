@@ -1,4 +1,4 @@
-import { Stmt, Program, Expr, BinaryExpr, NumericLiteral, Identifier, VarDeclaration, AssignmentExpr, ObjectLiteral, Property, CallExpr, MemberExpr, FunctionDeclaration, StringLiteral, IfStatement, ReturnStatement, LogicalExpr, ArrayLiteral, UnaryExpr, TernaryExpr } from "./ast";
+import { Stmt, Program, Expr, BinaryExpr, NumericLiteral, Identifier, VarDeclaration, AssignmentExpr, ObjectLiteral, Property, CallExpr, MemberExpr, FunctionDeclaration, StringLiteral, IfStatement, ReturnStatement, LogicalExpr, ArrayLiteral, UnaryExpr, TernaryExpr, CatchClause } from "./ast";
 import { Token, TokenType, tokensize} from "./lexer";
 
 export default class Parser {
@@ -66,6 +66,10 @@ export default class Parser {
                 return this.parse_for_statement();
             case TokenType.Return:
                 return this.parse_return_statement();
+            case TokenType.Try:
+                return this.parse_try_statement();
+            case TokenType.Throw:
+                return this.parse_throw_statement();
             default: {
                 const expr = this.parse_expr();
                 
@@ -713,6 +717,107 @@ export default class Parser {
             condition,
             increment,
             body,
+        };
+    }
+
+    private parse_try_statement(): Stmt {
+        const tryToken = this.at(); // Store the 'try' token for error reporting
+        this.eat(); // eat 'try'
+        
+        // Check for opening brace
+        if (this.at().type !== TokenType.OpenBrace) {
+            throw `Error at line ${tryToken.line}: Expected opening brace after try keyword`;
+        }
+        this.eat(); // eat '{'
+        
+        const tryBlock: Stmt[] = [];
+        while (this.at().type !== TokenType.EOF && this.at().type !== TokenType.CloseBrace) {
+            tryBlock.push(this.parse_stmt());
+        }
+        
+        // Check for closing brace
+        if (this.at().type !== TokenType.CloseBrace) {
+            throw `Error at line ${tryToken.line}: Missing closing brace for try block`;
+        }
+        this.eat(); // eat '}'
+        
+        // Must have a catch clause
+        if (this.at().type !== TokenType.Catch) {
+            throw `Error at line ${tryToken.line}: Expected catch clause after try block`;
+        }
+        
+        // Parse the catch clause
+        const catchClause = this.parse_catch_clause();
+        
+        return {
+            kind: "TryStatement",
+            tryBlock,
+            catchClause
+        };
+    }
+
+    private parse_catch_clause(): CatchClause {
+        const catchToken = this.at(); // Store the 'catch' token for error reporting
+        this.eat(); // eat 'catch'
+        
+        // Check for opening parenthesis
+        if (this.at().type !== TokenType.OpenParen) {
+            throw `Error at line ${catchToken.line}: Expected opening parenthesis after catch keyword`;
+        }
+        this.eat(); // eat '('
+        
+        // Parse the error parameter identifier
+        const parameter = this.expect(
+            TokenType.Identifier,
+            "Expected error parameter name in catch clause"
+        ).value;
+        
+        // Check for closing parenthesis
+        if (this.at().type !== TokenType.CloseParen) {
+            throw `Error at line ${catchToken.line}: Expected closing parenthesis after catch parameter`;
+        }
+        this.eat(); // eat ')'
+        
+        // Check for opening brace
+        if (this.at().type !== TokenType.OpenBrace) {
+            throw `Error at line ${catchToken.line}: Expected opening brace after catch parameters`;
+        }
+        this.eat(); // eat '{'
+        
+        const body: Stmt[] = [];
+        while (this.at().type !== TokenType.EOF && this.at().type !== TokenType.CloseBrace) {
+            body.push(this.parse_stmt());
+        }
+        
+        // Check for closing brace
+        if (this.at().type !== TokenType.CloseBrace) {
+            throw `Error at line ${catchToken.line}: Missing closing brace for catch block`;
+        }
+        this.eat(); // eat '}'
+        
+        return {
+            kind: "CatchClause",
+            parameter,
+            body
+        };
+    }
+
+    private parse_throw_statement(): Stmt {
+        const throwToken = this.at(); // Store the 'throw' token for error reporting
+        this.eat(); // eat 'throw'
+        
+        // Parse the expression to throw
+        const argument = this.parse_expr();
+        
+        // Expect semicolon
+        if (this.at().type !== TokenType.Semicolon) {
+            throw `Error at line ${throwToken.line}: Expected semicolon after throw statement`;
+        }
+        this.eat(); // eat ';'
+        
+        return {
+            kind: "ThrowStatement",
+            argument
         };
     }
 }

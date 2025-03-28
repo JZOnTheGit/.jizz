@@ -103,14 +103,69 @@ export function eval_identifier(ident: Identifier, env: Environment): RuntimeVal
 }
 
 export function eval_assignment(node: AssignmentExpr, env: Environment): RuntimeValue{
-    if (node.assigne.kind !== "Identifier"){
-        throw `Invalid left hand side of assignment expression ${JSON.stringify(node.assigne)}`;
+    // Evaluate the right-hand side of the assignment first
+    const value = evaluate(node.value, env);
+    
+    // Handle different types of assignment targets
+    if (node.assigne.kind === "Identifier") {
+        // Simple variable assignment: x = value
+        const varname = (node.assigne as Identifier).symbol;
+        return env.assignVar(varname, value);
+    } 
+    else if (node.assigne.kind === "MemberExpr") {
+        // Object/array property assignment: obj.prop = value or arr[index] = value
+        const memberExpr = node.assigne as MemberExpr;
+        const object = evaluate(memberExpr.object, env);
+        
+        if (object.type !== 'object') {
+            throw `Cannot set property of non-object value: ${object.type}`;
+        }
+        
+        const objectValue = object as ObjectValue;
+        
+        // Handle the property name (computed or direct)
+        let propName: string;
+        
+        if (memberExpr.computed) {
+            // Array index or computed property: obj[prop] = value
+            const prop = evaluate(memberExpr.property, env);
+            
+            if (prop.type === 'number') {
+                // Handle array indexing with numbers
+                propName = (prop as NumberValue).value.toString();
+            } else if (prop.type === 'string') {
+                // Handle object property access with string
+                propName = (prop as StringValue).value;
+            } else {
+                throw `Object/array property name must be a string or number, got: ${prop.type}`;
+            }
+        } else {
+            // Direct object property: obj.prop = value
+            if (memberExpr.property.kind !== 'Identifier') {
+                throw `Property must be an identifier in dot notation`;
+            }
+            
+            propName = (memberExpr.property as Identifier).symbol;
+        }
+        
+        // Set the property on the object
+        objectValue.properties.set(propName, value);
+        
+        // Update length property for arrays if needed
+        if (propName.match(/^\d+$/)) {
+            const index = parseInt(propName);
+            const currentLength = objectValue.properties.has('length') ? 
+                (objectValue.properties.get('length') as NumberValue).value : 0;
+                
+            if (index >= currentLength) {
+                objectValue.properties.set('length', { type: 'number', value: index + 1 } as NumberValue);
+            }
+        }
+        
+        return value;
     }
-
-    const varname = (node.assigne as Identifier).symbol;
-    return env.assignVar(varname, evaluate(node.value, env));
     
-    
+    throw `Invalid left-hand side of assignment expression: ${node.assigne.kind}`;
 }
 
 
@@ -170,14 +225,26 @@ export function eval_member_expr(expr: MemberExpr, env: Environment): RuntimeVal
     const objectValue = obj as ObjectValue;
     
     if (expr.computed) {
-        // Handle computed property access obj["prop"]
+        // Handle computed property access obj["prop"] or array[index]
         const prop = evaluate(expr.property, env);
-        if (prop.type !== 'string') {
-            throw `Object property name must be a string`;
+        let propName: string;
+        
+        if (prop.type === 'number') {
+            // Handle array indexing
+            propName = (prop as NumberValue).value.toString();
+        } else if (prop.type === 'string') {
+            // Handle object property access
+            propName = (prop as StringValue).value;
+        } else {
+            throw `Object property name must be a string or number, got: ${prop.type}`;
         }
         
-        const propName = (prop as StringValue).value;
+        // Return the property value or null if not found (for arrays)
         if (!objectValue.properties.has(propName)) {
+            // For arrays, non-existent indices should return null instead of throwing
+            if (propName.match(/^\d+$/) && objectValue.properties.has('length')) {
+                return MK_NULL();
+            }
             throw `Property '${propName}' does not exist on object`;
         }
         

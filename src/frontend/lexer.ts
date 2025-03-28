@@ -29,6 +29,9 @@ export enum TokenType {
     Skibidi, //skibidi (was while)
     Too, //too (was for)
     Return,
+    Try, //try
+    Catch, //catch
+    Throw, //throw
     
     // Separators
     Semicolon, //;
@@ -51,6 +54,9 @@ const KEYWORDS: Record<string, TokenType> = {
     skibidi: TokenType.Skibidi,  // only skibidi for while loops
     too: TokenType.Too,          // only too for for loops
     return: TokenType.Return,
+    try: TokenType.Try,
+    catch: TokenType.Catch,
+    throw: TokenType.Throw,
 }
 
 // Token interface definition

@@ -1,0 +1,52 @@
+// Try-Catch-Throw Syntax Highlighting Test File
+// This file demonstrates the try-catch-throw syntax for VSCode highlighting
+
+// Basic try-catch block
+try {
+    let result = 10 / 0;
+    buss("This won't execute if there's an error");
+} catch (error) {
+    buss("Caught error:", error);
+}
+
+// Function with try-catch
+typeshii divideNumbers(a, b) {
+    try {
+        if (b == 0) {
+            throw "Division by zero is not allowed";
+        }
+        return a / b;
+    } catch (error) {
+        buss("Error in division:", error);
+        return 0;
+    }
+}
+
+// Nested try-catch blocks
+try {
+    buss("Outer try block");
+    try {
+        buss("Inner try block");
+        throw "Inner error";
+    } catch (innerError) {
+        buss("Caught inner error:", innerError);
+        throw "Rethrown from inner catch";
+    }
+} catch (outerError) {
+    buss("Caught in outer catch:", outerError);
+}
+
+// Try-catch with objects
+try {
+    throw { code: 404, message: "Not found" };
+} catch (objError) {
+    buss("Error code:", objError.code);
+    buss("Error message:", objError.message);
+}
+
+// Run the divide function
+let result = divideNumbers(10, 2);
+buss("Result of 10/2:", result);
+
+result = divideNumbers(10, 0);
+buss("Result of 10/0:", result); 
