@@ -1,10 +1,10 @@
 // Example 1: Basic number guessing game
 buss("=== NUMBER GUESSING GAME ===");
-let secretNumber = 42;  // Hard-coded for test purposes
+ts secretNumber = 42;  // Hard-coded for test purposes
 buss("I'm thinking of a number between 1 and 100.");
 
-let guess = int(ask("Enter your guess: "));
-let attempts = 1;
+ts guess = int(ask("Enter your guess: "));
+ts attempts = 1;
 
 skibidi (guess != secretNumber) {
     if (guess < secretNumber) {
@@ -22,8 +22,8 @@ buss("Congratulations! You guessed the number in", attempts, "attempts.");
 buss("\n=== SUM CALCULATOR ===");
 buss("Enter numbers to add. Enter 0 when you're done.");
 
-let sum = 0;
-let inputNum = int(ask("Enter a number: "));
+ts sum = 0;
+ts inputNum = int(ask("Enter a number: "));
 
 skibidi (inputNum != 0) {
     sum = sum + inputNum;
@@ -35,11 +35,11 @@ buss("Final sum:", sum);
 
 // Example 3: Using too loops with user input for repetition
 buss("\n=== MULTIPLICATION TABLE GENERATOR ===");
-let tableSize = int(ask("Enter the size of the multiplication table: "));
+ts tableSize = int(ask("Enter the size of the multiplication table: "));
 
-too (let i = 1; i <= tableSize; i = i + 1) {
-    let row = "";
-    too (let j = 1; j <= tableSize; j = j + 1) {
+too (ts i = 1; i <= tableSize; i = i + 1) {
+    ts row = "";
+    too (ts j = 1; j <= tableSize; j = j + 1) {
         row = row + (i * j) + "   ";  // Using spaces instead of tab
     }
     buss(row);
@@ -47,18 +47,18 @@ too (let i = 1; i <= tableSize; i = i + 1) {
 
 // Example 4: Validating user input in a loop
 buss("\n=== INPUT VALIDATION EXAMPLE ===");
-let validInput = cap;
-let age = 0;
+ts validInput = cap;
+ts age = 0;
 
 skibidi (validInput == cap) {
-    let input = ask("Enter your age (must be between 1 and 120): ");
+    ts input = ask("Enter your age (must be between 1 and 120): ");
     age = int(input);
     
     // Check if conversion worked
-    let conversionSucceeded = str(age) == input;
+    ts conversionSucceeded = str(age) == input;
     
     // Check if in range (separate conditions)
-    let inValidRange = frfr;
+    ts inValidRange = frfr;
     if (age < 1) {
         inValidRange = cap;
     }
@@ -79,7 +79,7 @@ buss("Thank you! Your age is:", age);
 
 // Example 5: Creating a simple menu system
 buss("\n=== MENU SYSTEM EXAMPLE ===");
-let running = frfr;
+ts running = frfr;
 
 skibidi (running == frfr) {
     buss("\nMENU OPTIONS:");
@@ -88,12 +88,12 @@ skibidi (running == frfr) {
     buss("3. Show Current Time");
     buss("4. Exit");
     
-    let choice = int(ask("Enter your choice (1-4): "));
+    ts choice = int(ask("Enter your choice (1-4): "));
     
     if (choice == 1) {
         buss("Hello, welcome to JIZZ language!");
     } else if (choice == 2) {
-        too (let i = 1; i <= 5; i = i + 1) {
+        too (ts i = 1; i <= 5; i = i + 1) {
             buss("Count:", i);
         }
     } else if (choice == 3) {

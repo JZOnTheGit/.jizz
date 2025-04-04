@@ -24,6 +24,7 @@ JIZZ embraces the "brainrot" philosophy, replacing traditional programming terms
 - Use `skibidi` instead of `while` for loops
 - Use `too` instead of `for` in loop constructs
 - Use `buss` for printing to console (bussin')
+- Use `ts` instead of `let` (ts (this shii) crazy 🥀)
 
 These unconventional keywords make JIZZ code instantly recognizable and add a layer of humor to your programming experience.
 
@@ -116,18 +117,18 @@ JIZZ provides a comprehensive set of array operations that let you manipulate ar
 
 ```javascript
 // Create an array
-let numbers = [1, 2, 3, 4, 5];
+ts numbers = [1, 2, 3, 4, 5];
 
 // Access elements by index
-let firstElement = numbers[0];  // 1
-let lastElement = numbers[4];   // 5
+ts firstElement = numbers[0];  // 1
+ts lastElement = numbers[4];   // 5
 
 // Modify elements
 numbers[2] = 99;
 buss(numbers);  // [1, 2, 99, 4, 5]
 
 // Get array length
-let length = arrayLength(numbers);  // 5
+ts length = arrayLength(numbers);  // 5
 ```
 
 ### Array Manipulation Methods
@@ -138,7 +139,7 @@ JIZZ provides the following methods for array manipulation:
 Adds one or more elements to the end of an array and returns the new length.
 
 ```javascript
-let arr = [1, 2, 3];
+ts arr = [1, 2, 3];
 push(arr, 4);          // Adds a single element
 buss(arr);             // [1, 2, 3, 4]
 
@@ -150,8 +151,8 @@ buss(arr);             // [1, 2, 3, 4, 5, 6, 7]
 Removes the last element from an array and returns that element.
 
 ```javascript
-let arr = [1, 2, 3, 4];
-let last = pop(arr);   // Removes and returns 4
+ts arr = [1, 2, 3, 4];
+ts last = pop(arr);   // Removes and returns 4
 buss(arr);             // [1, 2, 3]
 ```
 
@@ -159,8 +160,8 @@ buss(arr);             // [1, 2, 3]
 Removes the first element from an array and returns that element.
 
 ```javascript
-let arr = [1, 2, 3];
-let first = shift(arr);  // Removes and returns 1
+ts arr = [1, 2, 3];
+ts first = shift(arr);  // Removes and returns 1
 buss(arr);               // [2, 3]
 ```
 
@@ -168,7 +169,7 @@ buss(arr);               // [2, 3]
 Adds one or more elements to the beginning of an array and returns the new length.
 
 ```javascript
-let arr = [3, 4, 5];
+ts arr = [3, 4, 5];
 unshift(arr, 1, 2);    // Adds elements to the beginning
 buss(arr);             // [1, 2, 3, 4, 5]
 ```
@@ -177,11 +178,11 @@ buss(arr);             // [1, 2, 3, 4, 5]
 Joins all elements of an array into a string using the specified separator.
 
 ```javascript
-let arr = ["Hello", "JIZZ", "World"];
-let str = join(arr, " ");     // Joins with space
+ts arr = ["Hello", "JIZZ", "World"];
+ts str = join(arr, " ");     // Joins with space
 buss(str);                    // "Hello JIZZ World"
 
-let csv = join(arr, ",");     // Joins with comma
+ts csv = join(arr, ",");     // Joins with comma
 buss(csv);                    // "Hello,JIZZ,World"
 ```
 
@@ -189,16 +190,16 @@ buss(csv);                    // "Hello,JIZZ,World"
 Determines whether an array includes a certain element, returning a boolean value.
 
 ```javascript
-let arr = [10, 20, 30, 40];
-let hasValue = includes(arr, 30);   // frfr
-let noValue = includes(arr, 50);    // cap
+ts arr = [10, 20, 30, 40];
+ts hasValue = includes(arr, 30);   // frfr
+ts noValue = includes(arr, 50);    // cap
 ```
 
 #### `reverse(array)`
 Reverses an array in place and returns the array.
 
 ```javascript
-let arr = [1, 2, 3, 4, 5];
+ts arr = [1, 2, 3, 4, 5];
 reverse(arr);
 buss(arr);   // [5, 4, 3, 2, 1]
 ```
@@ -210,14 +211,14 @@ JIZZ arrays can be used for more complex operations like:
 #### Multidimensional Arrays
 ```javascript
 // 2D array (matrix)
-let matrix = [
+ts matrix = [
     [1, 2, 3],
     [4, 5, 6],
     [7, 8, 9]
 ];
 
 // Access nested elements
-let element = matrix[1][2];   // 6
+ts element = matrix[1][2];   // 6
 
 // Modify nested elements
 matrix[0][2] = 30;
@@ -226,7 +227,7 @@ matrix[0][2] = 30;
 #### Arrays of Objects
 ```javascript
 // Array of person objects
-let people = [
+ts people = [
     { name: "Alice", age: 30 },
     { name: "Bob", age: 25 },
     { name: "Charlie", age: 35 }
@@ -242,12 +243,12 @@ people[0].age = 31;
 #### Dynamic Arrays
 ```javascript
 // Create an empty array and add elements dynamically
-let dynamicArray = [];
+ts dynamicArray = [];
 push(dynamicArray, "first");
 push(dynamicArray, "second");
 
 // Create sparse arrays (with gaps)
-let sparse = [];
+ts sparse = [];
 sparse[0] = 10;
 sparse[5] = 50;
 buss(sparse);  // [10, undefined, undefined, undefined, undefined, 50]
@@ -308,12 +309,12 @@ npm run build && node dist/src/cli.js run your-test-file.jizz
 ### Variables and Constants
 
 ```javascript
-let x = 10;
+ts x = 10;
 const PI = 3.14159;
 
 // Booleans use frfr and cap
-let isValid = frfr;  // true
-let isFake = cap;    // false
+ts isValid = frfr;  // true
+ts isFake = cap;    // false
 
 if (isValid == frfr) {
     buss("This is frfr!");
@@ -323,8 +324,8 @@ if (isValid == frfr) {
 ### String Operations
 
 ```javascript
-let name = "John";
-let greeting = "Hello, " + name + "!";
+ts name = "John";
+ts greeting = "Hello, " + name + "!";
 buss(greeting);  // Output: Hello, John!
 
 // String methods
@@ -340,7 +341,7 @@ buss("Name:\tJohn");     // Outputs with tab spacing
 ### Objects
 
 ```javascript
-let person = {
+ts person = {
     name: "John",
     age: 30,
     isStudent: cap,
@@ -353,7 +354,7 @@ buss(person);  // Output: { name: "John", age: 30, isStudent: false, city: "New 
 
 ```javascript
 typeshii add(a, b) {
-    let result = a + b;
+    ts result = a + b;
     buss("Sum is:", result);
     return result;
 }
@@ -364,7 +365,7 @@ add(5, 3);  // Output: Sum is: 8
 ### Control Flow
 
 ```javascript
-let age = 25;
+ts age = 25;
 
 if (age >= 21) {
     if (age < 30) {
@@ -377,7 +378,7 @@ if (age >= 21) {
 }
 
 // Using boolean keywords
-let canDrive = age >= 16 ? frfr : cap;
+ts canDrive = age >= 16 ? frfr : cap;
 if (canDrive == frfr) {
     buss("Can drive!");
 }
@@ -387,11 +388,11 @@ if (canDrive == frfr) {
 
 ```javascript
 // Basic input
-let name = ask("What's your name? ");
+ts name = ask("What's your name? ");
 buss("Hello, " + name + "!");
 
 // Input with type conversion
-let age = int(ask("How old are you? "));
+ts age = int(ask("How old are you? "));
 if (age >= 18) {
     buss("You're an adult!");
 } else {
@@ -399,53 +400,46 @@ if (age >= 18) {
 }
 
 // Type conversion examples
-let numStr = "42";
-let num = int(numStr);      // Convert string to integer
-let strNum = str(num);      // Convert number to string
-let boolStr = str(frfr);    // Converts to "frfr"
-let capStr = str(cap);      // Converts to "cap"
+ts numStr = "42";
+ts num = int(numStr);      // Convert string to integer
+ts strNum = str(num);      // Convert number to string
+ts boolStr = str(frfr);    // Converts to "frfr"
+ts capStr = str(cap);      // Converts to "cap"
 ```
 
 ### Logical Operators
 
 ```javascript
 // NOT operator (!)
-let isActive = frfr;
-let isInactive = !isActive;  // false
+ts isActive = frfr;
+ts isInactive = !isActive;  // false
 buss("!true =", !isActive);  // Output: !true = false
 
 // AND operator (&&)
-let isAdult = frfr;
-let hasID = frfr;
-let canBuyAlcohol = isAdult && hasID;  // true
+ts isAdult = frfr;
+ts hasID = frfr;
+ts canBuyAlcohol = isAdult && hasID;  // true
 buss("Adult AND has ID:", canBuyAlcohol);
 
 // OR operator (||)
-let hasTicket = cap;
-let isVIP = frfr;
-let canEnter = hasTicket || isVIP;  // true
+ts hasTicket = cap;
+ts isVIP = frfr;
+ts canEnter = hasTicket || isVIP;  // true
 buss("Has ticket OR is VIP:", canEnter);
 
 // Comparison with logical operators
-let age = 25;
-let height = 180;
+ts age = 25;
+ts height = 180;
 if (age > 18 && height > 160) {
     buss("Can ride all attractions!");
 }
 
 // Short-circuit evaluation
-let result = cap && functionShouldNotRun();  // Function is not called
+ts result = cap && functionShouldNotRun();  // Function is not called
 buss("Short-circuit AND:", result);  // false
 
 result = frfr || functionShouldNotRun();  // Function is not called
 buss("Short-circuit OR:", result);  // true
-
-
-// Define the function referenced above
-typeshii functionShouldNotRun() {
-    buss("This function should not run!");
-    return "Function ran";
-}
 ```
 
 ### Ternary Operator
@@ -454,13 +448,13 @@ JIZZ supports the conditional (ternary) operator for concise conditional express
 
 ```javascript
 // Basic ternary syntax
-let max = a > b ? a : b;
+ts max = a > b ? a : b;
 
 // Nested ternary for multiple conditions
-let message = age < 18 ? "Minor" : age < 65 ? "Adult" : "Senior";
+ts message = age < 18 ? "Minor" : age < 65 ? "Adult" : "Senior";
 
 // With function calls
-let greeting = hasPermission ? getVIPMessage() : getRegularMessage();
+ts greeting = hasPermission ? getVIPMessage() : getRegularMessage();
 
 // Custom absolute value function using ternary
 typeshii abs(n) {
@@ -474,15 +468,15 @@ JIZZ fully supports negative numbers in all contexts:
 
 ```javascript
 // Basic negative numbers
-let a = -10;
+ts a = -10;
 buss("Negative value:", a);
 
 // Expressions with negative numbers
-let result = 5 + -3;  // 2
-let product = -4 * 3;  // -12
+ts result = 5 + -3;  // 2
+ts product = -4 * 3;  // -12
 
 // Nested negation
-let doubleNegative = -(-5);  // 5
+ts doubleNegative = -(-5);  // 5
 
 // Functions with negative numbers
 typeshii negate(num) {
@@ -534,7 +528,7 @@ JIZZ provides robust error handling through try-catch blocks and the throw state
 // Basic try-catch
 try {
     // Code that might cause an error
-    let result = 10 / 0;
+    ts result = 10 / 0;
     buss("This won't execute if an error occurs");
 } catch (error) {
     // Handle the error
@@ -543,7 +537,7 @@ try {
 
 // Throwing custom errors
 try {
-    let age = -5;
+    ts age = -5;
     if (age < 0) {
         throw "Age cannot be negative";
     }

@@ -22,7 +22,7 @@ export enum TokenType {
     CloseBracket, //]
     
     // Keywords
-    Let, //let
+    Let, //ts
     Const, //const
     If, //if
     Else, //else
@@ -31,7 +31,7 @@ export enum TokenType {
     Return,
     Try, //try
     Catch, //catch
-    Throw, //throw
+    Throw,
     
     // Separators
     Semicolon, //;
@@ -46,7 +46,7 @@ export enum TokenType {
 
 // Keywords dictionary
 const KEYWORDS: Record<string, TokenType> = {
-    let: TokenType.Let,
+    ts: TokenType.Let,
     const: TokenType.Const,
     typeshii: TokenType.Fn,  // changed from "fn" to "typeshii" for function declarations
     if: TokenType.If,

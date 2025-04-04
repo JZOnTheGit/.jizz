@@ -1,7 +1,7 @@
 // Test skibidi loop
 buss("--- Testing skibidi loop ---");
-let count = 1;
-let sum = 0;
+ts count = 1;
+ts sum = 0;
 skibidi (count <= 5) {
     buss("Count:", count);
     sum = sum + count;
@@ -11,8 +11,8 @@ buss("Sum of 1-5:", sum);  // Should be 15
 
 // Test too loop
 buss("\n--- Testing too loop ---");
-let forSum = 0;
-too (let i = 1; i <= 5; i = i + 1) {
+ts forSum = 0;
+too (ts i = 1; i <= 5; i = i + 1) {
     buss("Iteration:", i);
     forSum = forSum + i;
 }
@@ -21,10 +21,10 @@ buss("Sum of 1-5 (too loop):", forSum);  // Should be 15
 // Test nested loops
 buss("\n--- Testing nested loops ---");
 buss("Multiplication table 3x3:");
-too (let i = 1; i <= 3; i = i + 1) {
+too (ts i = 1; i <= 3; i = i + 1) {
     // Create a new row variable for each iteration
-    let rowStr = "";
-    too (let j = 1; j <= 3; j = j + 1) {
+    ts rowStr = "";
+    too (ts j = 1; j <= 3; j = j + 1) {
         rowStr = rowStr + (i * j) + "   ";  // Using spaces instead of tab
     }
     buss(rowStr);
@@ -32,9 +32,9 @@ too (let i = 1; i <= 3; i = i + 1) {
 
 // Test loop with conditionals
 buss("\n--- Testing loops with conditionals ---");
-too (let i = 1; i <= 10; i = i + 1) {
-    let half = i / 2;
-    let isEven = (i % 2 == 0);  // Simpler way to check if even
+too (ts i = 1; i <= 10; i = i + 1) {
+    ts half = i / 2;
+    ts isEven = (i % 2 == 0);  // Simpler way to check if even
     if (isEven) {
         buss(i, "is even");
     } else {
@@ -44,16 +44,16 @@ too (let i = 1; i <= 10; i = i + 1) {
 
 // Test empty condition parts in too loop
 buss("\n--- Testing too loop with optional parts ---");
-let x = 0;
-too (let i = 0; i < 5;) {
+ts x = 0;
+too (ts i = 0; i < 5;) {
     buss("Value of i:", i);
     i = i + 1;
 }
 
 // Test skibidi loop with complex condition
 buss("\n--- Testing skibidi loop with complex condition ---");
-let a = 1;
-let b = 10;
+ts a = 1;
+ts b = 10;
 skibidi (a < 5) {
     if (b > 5) {
         buss("a =", a, "b =", b);

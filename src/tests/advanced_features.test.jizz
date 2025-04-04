@@ -9,8 +9,8 @@ buss("=========================================\n");
 buss("✅ TESTING LOGICAL OPERATORS:");
 buss("------------------------------");
 
-let a = frfr;
-let b = cap;
+ts a = frfr;
+ts b = cap;
 
 // NOT operator
 buss("  !true =", !a);
@@ -23,7 +23,7 @@ buss("  10 == 10 =", 10 == 10);
 
 // AND and OR operators
 buss("\n  Logical AND/OR operators:");
-let result = (5 < 10) && (3 > 1);
+ts result = (5 < 10) && (3 > 1);
 buss("  (5 < 10) && (3 > 1) =", result);
 
 result = (5 > 10) || (3 < 10);
@@ -41,9 +41,9 @@ buss("  true || function() =", result);   // Should be true without calling func
 buss("\n✅ TESTING MATH OPERATIONS:");
 buss("------------------------------");
 
-let pi = 3.14159;
+ts pi = 3.14159;
 // Simple floor calculation without using Math.floor
-let rounded = pi - (pi % 1);
+ts rounded = pi - (pi % 1);
 buss("  Pi =", pi);
 buss("  Floor of Pi =", rounded);  // Should be 3
 
@@ -52,7 +52,7 @@ buss("\n✅ TESTING OBJECTS:");
 buss("------------------------------");
 
 // Create object with multiple properties
-let person = { 
+ts person = { 
     name: "John",
     age: 30,
     isStudent: cap

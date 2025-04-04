@@ -140,7 +140,7 @@ export default class Parser {
     parse_var_declaration(): Stmt {
         const startToken = this.at();  // Store the starting token
         const isConstant = this.eat().type == TokenType.Const;
-        const identifier = this.expect(TokenType.Identifier, "Expected identifier name after let/const").value;
+        const identifier = this.expect(TokenType.Identifier, "Expected identifier name after ts/const").value;
        
         if (this.at().type == TokenType.Semicolon) {
             this.eat(); //expect semicolon

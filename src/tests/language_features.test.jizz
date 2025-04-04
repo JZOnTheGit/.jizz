@@ -1,10 +1,10 @@
 // Test variable declarations
-let x = 10;
+ts x = 10;
 const PI = 3.14159;
 
 // Test string operations
-let name = "John";
-let greeting = "Hello, " + name + "!";
+ts name = "John";
+ts greeting = "Hello, " + name + "!";
 buss(greeting);  // Should print: Hello, John!
 
 // Test string methods
@@ -13,10 +13,10 @@ buss(String_toUpperCase(greeting));  // Should print uppercase version
 buss(String_substring(greeting, 0, 5));  // Should print: Hello
 
 // Test arithmetic operations
-let y = 5;
-let sum = x + y;
-let product = x * y;
-let quotient = x / y;
+ts y = 5;
+ts sum = x + y;
+ts product = x * y;
+ts quotient = x / y;
 buss("Arithmetic:", sum, product, quotient);
 
 // Test comparison operators
@@ -25,7 +25,7 @@ if (x > y) {
 }
 
 // Test objects
-let person = {
+ts person = {
     name: "John",
     age: 30,
     city: "New York"
@@ -34,7 +34,7 @@ buss(person);
 
 // Test functions
 typeshii add(a, b) {
-    let sum = a + b;
+    ts sum = a + b;
     buss("Sum is:", sum);
     return sum;
 }
@@ -42,7 +42,7 @@ typeshii add(a, b) {
 add(5, 3);  // Should output 8
 
 // Test nested if statements
-let age = 25;
+ts age = 25;
 if (age >= 21) {
     if (age < 30) {
         buss("Young adult");
@@ -54,13 +54,13 @@ if (age >= 21) {
 }
 
 // Test string manipulation
-let sentence = "  Hello World  ";
+ts sentence = "  Hello World  ";
 buss(String_trim(sentence));
-let words = String_split(sentence, " ");
+ts words = String_split(sentence, " ");
 buss(words);
 
 // Test error handling
 // Uncomment to test error cases:
-// let undefinedVar;  // Should throw error
+// ts undefinedVar;  // Should throw error
 // const PI = 3.14;  // Should throw error (redeclaration)
-// let invalid = 1 + ;  // Should throw syntax error 
+// ts invalid = 1 + ;  // Should throw syntax error 

@@ -2,7 +2,7 @@
   "name": "jizz-language",
   "displayName": "JIZZ Brainrot Syntax Highlighter",
   "description": "Syntax highlighting for JIZZ Programming Language with unique brainrot syntax",
-  "version": "1.2.0",
+  "version": "1.4.2",
   "publisher": "JasstejSingh",
   "icon": "jizz-icon.png",
   "engines": {
